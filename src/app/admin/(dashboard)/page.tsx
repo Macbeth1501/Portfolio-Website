@@ -6,7 +6,7 @@ const sections = [
   { label: "Skills", href: "/admin/skills", description: "Add, edit, and delete skills, grouped by domain." },
   { label: "Achievements", href: "/admin/achievements", description: "Add, edit, reorder, and delete achievements." },
   { label: "Manage fields", href: "/admin/fields", description: "Define custom fields that appear on each type's form and publicly." },
-  { label: "Site settings", href: null, description: "Edit Hero, Snapshot stats, and Footer/contact links." },
+  { label: "Site settings", href: "/admin/settings", description: "Edit Hero, Snapshot stats, and Footer/contact links." },
 ];
 
 export default function AdminHome() {
@@ -14,8 +14,8 @@ export default function AdminHome() {
     <div>
       <h1 className="font-[family-name:var(--font-display)] text-2xl font-medium text-ink">Dashboard</h1>
       <p className="mt-2 max-w-[60ch] text-sm text-ink-muted">
-        Projects, Experience, Skills, and Achievements have full add/edit/delete and reordering (Projects
-        also has image upload), plus custom fields via Manage fields. Site settings editability is Phase 8.
+        Every content type has full add/edit/delete, reordering, and custom fields; Site settings covers
+        Hero, Snapshot stats, and Footer links.
       </p>
 
       <ul className="mt-8 divide-y divide-line border-t border-line">
