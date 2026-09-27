@@ -10,8 +10,10 @@
  *
  * Run with: npm run seed
  */
-import "dotenv/config";
+import { config } from "dotenv";
 import { createClient } from "@supabase/supabase-js";
+
+config({ path: ".env.local" });
 import { achievements, experience, footerLinks, hero, projects, skillGroups, snapshotStats } from "../src/lib/content";
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
