@@ -1,6 +1,8 @@
-import { achievements } from "@/lib/content";
+import type { Achievement } from "@/lib/types";
 
-export function AchievementsSection() {
+export function AchievementsSection({ achievements }: { achievements: Achievement[] }) {
+  if (achievements.length === 0) return null;
+
   return (
     <section aria-labelledby="achievements-heading" className="mt-16 sm:mt-24">
       <h2

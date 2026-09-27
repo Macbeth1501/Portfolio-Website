@@ -1,9 +1,11 @@
-import { snapshotStats } from "@/lib/content";
+import type { SnapshotStat } from "@/lib/types";
 
-export function SnapshotStrip() {
+export function SnapshotStrip({ stats }: { stats: SnapshotStat[] }) {
+  if (stats.length === 0) return null;
+
   return (
     <dl className="mt-10 flex flex-wrap divide-x divide-line border-y border-line py-4 sm:mt-14">
-      {snapshotStats.map((stat) => (
+      {stats.map((stat) => (
         <div key={stat.label} className="flex flex-col gap-1 px-4 first:pl-0 last:pr-0 sm:px-6">
           <dt className="text-xs text-ink-muted">{stat.label}</dt>
           <dd className="font-mono text-sm text-ink sm:text-base">{stat.value}</dd>

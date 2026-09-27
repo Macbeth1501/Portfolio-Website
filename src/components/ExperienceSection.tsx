@@ -1,4 +1,4 @@
-import { experience } from "@/lib/content";
+import type { Experience } from "@/lib/types";
 
 const locationLabel: Record<string, string> = {
   on_site: "On-site",
@@ -6,7 +6,9 @@ const locationLabel: Record<string, string> = {
   hybrid: "Hybrid",
 };
 
-export function ExperienceSection() {
+export function ExperienceSection({ experience }: { experience: Experience[] }) {
+  if (experience.length === 0) return null;
+
   return (
     <section aria-labelledby="experience-heading" className="mt-16 sm:mt-24">
       <h2

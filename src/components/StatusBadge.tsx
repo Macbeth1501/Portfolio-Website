@@ -1,4 +1,4 @@
-import type { ProjectStatus } from "@/lib/content";
+import type { ProjectStatus } from "@/lib/types";
 
 const statusCopy: Record<ProjectStatus, string> = {
   live: "Live",

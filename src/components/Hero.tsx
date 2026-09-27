@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { hero } from "@/lib/content";
+import type { Hero as HeroData } from "@/lib/types";
 
-export function Hero() {
+export function Hero({ hero }: { hero: HeroData }) {
   return (
     <section aria-label="Introduction" className="flex flex-col gap-6 pt-16 sm:flex-row sm:items-start sm:gap-10 sm:pt-24">
       <div className="flex-1">

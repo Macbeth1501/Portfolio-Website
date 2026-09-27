@@ -1,9 +1,16 @@
-import type { Project } from "@/lib/content";
+import Image from "next/image";
+import type { Project } from "@/lib/types";
 import { StatusBadge } from "./StatusBadge";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="py-8">
+      {project.imageUrl ? (
+        <div className="relative mb-4 h-48 w-full overflow-hidden sm:h-64">
+          <Image src={project.imageUrl} alt={`Screenshot of ${project.title}`} fill className="object-cover" />
+        </div>
+      ) : null}
+
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
         <h3 className="max-w-[52ch] text-lg font-medium text-ink">{project.title}</h3>
         <div className="flex items-center gap-3">

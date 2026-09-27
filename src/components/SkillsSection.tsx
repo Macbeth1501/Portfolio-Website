@@ -1,6 +1,8 @@
-import { skillGroups } from "@/lib/content";
+import type { SkillGroup } from "@/lib/types";
 
-export function SkillsSection() {
+export function SkillsSection({ skillGroups }: { skillGroups: SkillGroup[] }) {
+  if (skillGroups.length === 0) return null;
+
   return (
     <section aria-labelledby="skills-heading" className="mt-16 sm:mt-24">
       <h2

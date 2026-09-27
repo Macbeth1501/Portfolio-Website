@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { projects } from "@/lib/content";
+import type { Project } from "@/lib/types";
 import { ProjectCard } from "./ProjectCard";
 
 const INITIAL_COUNT = 6;
 
-export function ProjectsSection() {
+export function ProjectsSection({ projects }: { projects: Project[] }) {
   const [expanded, setExpanded] = useState(false);
+
+  if (projects.length === 0) return null;
+
   const visible = expanded ? projects : projects.slice(0, INITIAL_COUNT);
   const remaining = projects.length - INITIAL_COUNT;
 

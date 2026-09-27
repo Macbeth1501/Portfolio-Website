@@ -1,8 +1,9 @@
 /**
- * Phase 3 static content — hardcoded from profile.md, mapped onto the
- * Section 5 schema in SPEC.md. Phase 4 replaces this file's role with reads
- * from Supabase; the shape of each type here mirrors the DB columns so that
- * swap is mechanical.
+ * Seed content — hardcoded from profile.md, mapped onto the Section 5 schema
+ * in SPEC.md. As of Phase 4 this file is used only by `scripts/seed.ts` to
+ * populate Supabase once; the live site reads from the database via
+ * `src/lib/queries.ts`. Kept here (rather than deleted) so the seed script
+ * has a single, reviewable source of truth for what got written to the DB.
  *
  * Content notes (see profile.md §14 for the full list of open questions):
  * - Where profile.md flags a conflict between sources, the account already
@@ -15,51 +16,16 @@
  *   throughout rather than pointing at a placeholder.
  */
 
-export type ProjectStatus = "live" | "in_progress" | "archived";
+import type { Achievement, Experience, Hero, Project, SkillGroup, SnapshotStat, FooterLink } from "./types";
 
-export type Project = {
-  slug: string;
-  title: string;
-  status: ProjectStatus;
-  dateRange: string;
-  problem: string;
-  approach: string;
-  result?: string;
-  techStack: string[];
-  liveUrl?: string;
-  repoUrl?: string;
-  teamNote?: string;
-};
-
-export type Experience = {
-  roleTitle: string;
-  organization: string;
-  dateRange: string;
-  locationType: "on_site" | "remote" | "hybrid";
-  description: string;
-  mentors?: string[];
-};
-
-export type SkillGroup = {
-  group: string;
-  skills: string[];
-};
-
-export type Achievement = {
-  title: string;
-  result: string;
-  context: string;
-  date: string;
-};
-
-export const hero = {
+export const hero: Hero = {
   fullName: "Rochan Shrish Awasthi",
-  roleLine: "B.Tech Computer Engineering — Applied AI/ML",
+  roleLine: "B.Tech Computer Engineering, applied AI/ML",
   bio: "Computer Engineering student at SVPCET, Nagpur, focused on speech processing, LLMs, computer vision, and geospatial AI. Research intern at IIIT Hyderabad's LTRC Speech Lab and AI intern at CS Tech AI. Winner of the ISRO Geospatial AI Challenge, national finalist at ISRO's Bharatiya Antariksh Hackathon, and published author (IJIRCCE 2026).",
-  photo: undefined as string | undefined,
+  photo: undefined,
 };
 
-export const snapshotStats: { label: string; value: string }[] = [
+export const snapshotStats: SnapshotStat[] = [
   { label: "CGPA", value: "9.01 / 10" },
   { label: "GitHub repos", value: "13" },
   { label: "LeetCode solved", value: "246" },
@@ -361,7 +327,7 @@ export const achievements: Achievement[] = [
   },
 ];
 
-export const footerLinks: { label: string; url: string }[] = [
+export const footerLinks: FooterLink[] = [
   { label: "Email", url: "mailto:rochansawasthi@gmail.com" },
   { label: "GitHub", url: "https://github.com/Macbeth1501" },
   { label: "LinkedIn", url: "https://www.linkedin.com/in/rochan-awasthi-393242302/" },
