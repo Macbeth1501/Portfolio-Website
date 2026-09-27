@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-27T00:00:00Z",
+  "title": "Design System: Rochan Awasthi Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#152a43" },
+      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#fbf9f4" },
+      "blue": { "role": "primary", "displayName": "Signal Blue", "canonical": "#2c5f8a" },
+      "blue-deep": { "role": "primary", "displayName": "Signal Blue Deep", "canonical": "#1d4568" },
+      "amber": { "role": "secondary", "displayName": "Ledger Amber", "canonical": "#e8a93b" },
+      "amber-deep": { "role": "secondary", "displayName": "Ledger Amber Deep (text-safe)", "canonical": "#906925" },
+      "green": { "role": "tertiary", "displayName": "Result Green", "canonical": "#3a8069" },
+      "green-deep": { "role": "tertiary", "displayName": "Result Green Deep (text-safe)", "canonical": "#397d67" },
+      "line": { "role": "neutral", "displayName": "Hairline", "canonical": "#dcd6c7" },
+      "ink-muted": { "role": "neutral", "displayName": "Ink Muted", "canonical": "#5b6b7d" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero name only." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs, nav, buttons, labels." },
+      "mono": { "displayName": "Mono", "purpose": "Dates, tech-stack tags, and measured metrics only." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "hero-settle", "value": "450ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The single hero entrance: name and photo settle into place together on load. Disabled under prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Status Badge — Live",
+      "kind": "chip",
+      "refersTo": "status-badge-live",
+      "description": "Marks a project as live/deployed.",
+      "html": "<span class=\"ds-status-badge ds-status-live\">Live</span>",
+      "css": ".ds-status-badge { display: inline-flex; align-items: center; border-radius: 2px; border-width: 1px; border-style: solid; padding: 2px 8px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; } .ds-status-live { color: #397d67; border-color: rgba(58, 128, 105, 0.4); }"
+    },
+    {
+      "name": "Status Badge — In Progress",
+      "kind": "chip",
+      "refersTo": "status-badge-in_progress",
+      "description": "Marks a project as actively in progress.",
+      "html": "<span class=\"ds-status-badge ds-status-in-progress\">In progress</span>",
+      "css": ".ds-status-badge { display: inline-flex; align-items: center; border-radius: 2px; border-width: 1px; border-style: solid; padding: 2px 8px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; } .ds-status-in-progress { color: #906925; border-color: rgba(232, 169, 59, 0.4); }"
+    },
+    {
+      "name": "Tag Chip",
+      "kind": "chip",
+      "refersTo": "tag-chip",
+      "description": "Tech-stack tag or skill chip. Uniform monochrome styling across every use, never colored per category.",
+      "html": "<span class=\"ds-tag-chip\">FastAPI</span>",
+      "css": ".ds-tag-chip { display: inline-block; border: 1px solid #dcd6c7; border-radius: 2px; padding: 2px 8px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: #5b6b7d; }"
+    },
+    {
+      "name": "Inline Link",
+      "kind": "custom",
+      "refersTo": "link-inline",
+      "description": "The only link style in the system: underlined, blue, no arrow suffix.",
+      "html": "<a class=\"ds-link\" href=\"#\">Repository</a>",
+      "css": ".ds-link { color: #2c5f8a; text-decoration: underline; text-underline-offset: 2px; } .ds-link:hover { color: #1d4568; } .ds-link:focus-visible { outline: 2px solid #2c5f8a; outline-offset: 2px; border-radius: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Working Profile",
+    "overview": "An editorial-magazine profile crossed with a lab notebook. The page reads like a confident, left-aligned profile piece in a serious publication — but every claim is stated like a research log entry: problem, approach, measured result, plainly, because the underlying work has real numbers behind it. Decoration is refused wherever it would compete with those numbers for attention. The page is calm and static at rest; it earns exactly one moment of motion, on load, and nothing after that argues for the visitor's attention through animation.",
+    "keyCharacteristics": [
+      "Left-aligned, single-column editorial reading flow — never centered, never a marketing-landing-page composition.",
+      "Evidence carried in JetBrains Mono: dates, tech tags, and measured metrics read as 'measured fact,' distinct from prose.",
+      "Color is restrained by rule, not by accident: amber and green each do real work in exactly one place per view, never both at full strength together.",
+      "One entrance sequence (hero name + photo settling in, ~450ms) and nothing else animates on scroll."
+    ],
+    "rules": [
+      { "name": "The One-Accent-at-a-Time Rule", "body": "At any given scroll position, only one of amber or green does real visual work. They never appear at full strength together in the same frame, and neither ever becomes a section background.", "section": "colors" },
+      { "name": "The Measured-Text Rule", "body": "Amber or green text on the paper background always renders in its -deep variant. The bright base tones exist for borders, chips, and small accents only — never for body-sized text, where they fail contrast.", "section": "colors" },
+      { "name": "The Mono-Means-Measured Rule", "body": "JetBrains Mono appears only on dates, tech-stack tags, and measured metrics. It never sets body prose or headings, and it is never reached for as a generic 'technical' signal.", "section": "typography" }
+    ],
+    "dos": [
+      "Do keep JetBrains Mono reserved for dates, tech tags, and measured metrics only.",
+      "Do render amber or green body text in its -deep variant to hold WCAG AA contrast on the paper background.",
+      "Do omit a project's Result field entirely when no real measured outcome exists yet, rather than inventing or placeholder-filling it.",
+      "Do separate list entries (Experience, Projects, Achievements) with a single hairline --line divider, never a card or shadow.",
+      "Do keep the hero's one entrance animation disabled under prefers-reduced-motion."
+    ],
+    "donts": [
+      "Don't use a warm cream background with a terracotta/clay accent — the generic AI-portfolio tell this system explicitly rejects.",
+      "Don't use amber and green at full strength in the same view.",
+      "Don't add a kicker/eyebrow label above any section heading.",
+      "Don't number projects (01/02/03) — status badges carry that signal instead.",
+      "Don't append an arrow to a link or button label.",
+      "Don't center the hero or use a gradient-blob background behind it.",
+      "Don't animate on scroll; the only animation is the hero's one-time entrance on load."
+    ]
+  }
+}
