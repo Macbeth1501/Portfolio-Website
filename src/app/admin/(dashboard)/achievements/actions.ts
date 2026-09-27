@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
+import { buildCustomFieldsPayload } from "@/lib/customFields";
 
 export type FormState = { error: string } | null;
 
@@ -28,6 +29,14 @@ function str(formData: FormData, key: string): string | null {
   return trimmed.length > 0 ? trimmed : null;
 }
 
+async function getFieldDefinitions(supabase: Awaited<ReturnType<typeof createAuthServerClient>>) {
+  const { data } = await supabase!
+    .from("field_definitions")
+    .select("key, label, type")
+    .eq("content_type", "achievement");
+  return data ?? [];
+}
+
 export async function createAchievement(_prevState: FormState, formData: FormData): Promise<FormState> {
   let supabase;
   try {
@@ -39,11 +48,14 @@ export async function createAchievement(_prevState: FormState, formData: FormDat
   const title = str(formData, "title");
   if (!title) return { error: "Title is required." };
 
+  const fieldDefinitions = await getFieldDefinitions(supabase);
+
   const { error } = await supabase.from("achievements").insert({
     title,
     result: str(formData, "result"),
     context: str(formData, "context"),
     date: str(formData, "date"),
+    custom_fields: buildCustomFieldsPayload(fieldDefinitions, formData),
   });
 
   if (error) return { error: error.message };
@@ -67,6 +79,8 @@ export async function updateAchievement(_prevState: FormState, formData: FormDat
   const title = str(formData, "title");
   if (!title) return { error: "Title is required." };
 
+  const fieldDefinitions = await getFieldDefinitions(supabase);
+
   const { error } = await supabase
     .from("achievements")
     .update({
@@ -74,6 +88,7 @@ export async function updateAchievement(_prevState: FormState, formData: FormDat
       result: str(formData, "result"),
       context: str(formData, "context"),
       date: str(formData, "date"),
+      custom_fields: buildCustomFieldsPayload(fieldDefinitions, formData),
     })
     .eq("id", id);
 

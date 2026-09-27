@@ -1,4 +1,5 @@
 import type { Experience } from "@/lib/types";
+import { CustomFieldsList } from "./CustomFieldsList";
 
 const locationLabel: Record<string, string> = {
   on_site: "On-site",
@@ -32,6 +33,7 @@ export function ExperienceSection({ experience }: { experience: Experience[] }) 
             {entry.mentors && entry.mentors.length > 0 ? (
               <p className="mt-3 text-sm text-ink-muted">Mentors: {entry.mentors.join(", ")}</p>
             ) : null}
+            <CustomFieldsList fields={entry.customFields} />
           </li>
         ))}
       </ul>

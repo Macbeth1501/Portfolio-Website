@@ -2,7 +2,9 @@
 
 import { useActionState } from "react";
 import type { SkillGroup } from "@/lib/types";
+import type { CustomFieldDef, CustomFieldValue } from "@/lib/customFields";
 import { SubmitButton } from "@/components/admin/SubmitButton";
+import { CustomFieldInputs } from "@/components/admin/CustomFieldInputs";
 import { createSkill, updateSkill, type FormState } from "./actions";
 
 const inputClass = "rounded-sm border border-line bg-paper px-3 py-2 text-ink";
@@ -17,7 +19,13 @@ const KNOWN_GROUPS: SkillGroup["group"][] = [
   "Blockchain",
 ];
 
-export function SkillForm({ skill }: { skill?: { id: string; name: string; group: string } }) {
+export function SkillForm({
+  skill,
+  fieldDefinitions,
+}: {
+  skill?: { id: string; name: string; group: string; customFields?: CustomFieldValue[] };
+  fieldDefinitions: CustomFieldDef[];
+}) {
   const isEdit = Boolean(skill);
   const action = isEdit ? updateSkill : createSkill;
   const [state, formAction] = useActionState<FormState, FormData>(action, null);
@@ -44,6 +52,8 @@ export function SkillForm({ skill }: { skill?: { id: string; name: string; group
           ))}
         </datalist>
       </div>
+
+      <CustomFieldInputs definitions={fieldDefinitions} values={skill?.customFields} />
 
       {state?.error ? <p className="text-sm text-amber-deep">{state.error}</p> : null}
 

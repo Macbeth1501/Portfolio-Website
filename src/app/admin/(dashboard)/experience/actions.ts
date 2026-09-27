@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
 import type { Experience } from "@/lib/types";
+import { buildCustomFieldsPayload } from "@/lib/customFields";
 
 export type FormState = { error: string } | null;
 
@@ -37,6 +38,14 @@ function parseMentors(raw: FormDataEntryValue | null): string[] {
     .filter(Boolean);
 }
 
+async function getFieldDefinitions(supabase: Awaited<ReturnType<typeof createAuthServerClient>>) {
+  const { data } = await supabase!
+    .from("field_definitions")
+    .select("key, label, type")
+    .eq("content_type", "experience");
+  return data ?? [];
+}
+
 export async function createExperience(_prevState: FormState, formData: FormData): Promise<FormState> {
   let supabase;
   try {
@@ -49,6 +58,8 @@ export async function createExperience(_prevState: FormState, formData: FormData
   const organization = str(formData, "organization");
   if (!roleTitle || !organization) return { error: "Role title and organization are required." };
 
+  const fieldDefinitions = await getFieldDefinitions(supabase);
+
   const { error } = await supabase.from("experiences").insert({
     role_title: roleTitle,
     organization,
@@ -56,6 +67,7 @@ export async function createExperience(_prevState: FormState, formData: FormData
     location_type: str(formData, "location_type") as Experience["locationType"] | null,
     description: str(formData, "description"),
     mentors: parseMentors(formData.get("mentors")),
+    custom_fields: buildCustomFieldsPayload(fieldDefinitions, formData),
   });
 
   if (error) return { error: error.message };
@@ -80,6 +92,8 @@ export async function updateExperience(_prevState: FormState, formData: FormData
   const organization = str(formData, "organization");
   if (!roleTitle || !organization) return { error: "Role title and organization are required." };
 
+  const fieldDefinitions = await getFieldDefinitions(supabase);
+
   const { error } = await supabase
     .from("experiences")
     .update({
@@ -89,6 +103,7 @@ export async function updateExperience(_prevState: FormState, formData: FormData
       location_type: str(formData, "location_type") as Experience["locationType"] | null,
       description: str(formData, "description"),
       mentors: parseMentors(formData.get("mentors")),
+      custom_fields: buildCustomFieldsPayload(fieldDefinitions, formData),
     })
     .eq("id", id);
 

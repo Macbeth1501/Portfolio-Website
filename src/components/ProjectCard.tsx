@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Project } from "@/lib/types";
 import { StatusBadge } from "./StatusBadge";
+import { CustomFieldsList } from "./CustomFieldsList";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
@@ -52,6 +53,8 @@ export function ProjectCard({ project }: { project: Project }) {
       ) : null}
 
       {project.teamNote ? <p className="mt-3 text-sm text-ink-muted">{project.teamNote}</p> : null}
+
+      <CustomFieldsList fields={project.customFields} />
 
       {project.liveUrl || project.repoUrl ? (
         <p className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm">

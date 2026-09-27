@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
 import type { ProjectStatus } from "@/lib/types";
+import { buildCustomFieldsPayload } from "@/lib/customFields";
 
 export type FormState = { error: string } | null;
 
@@ -50,6 +51,14 @@ async function uploadProjectImage(
   return path;
 }
 
+async function getFieldDefinitions(supabase: Awaited<ReturnType<typeof createAuthServerClient>>) {
+  const { data } = await supabase!
+    .from("field_definitions")
+    .select("key, label, type")
+    .eq("content_type", "project");
+  return data ?? [];
+}
+
 async function deleteProjectImage(
   supabase: Awaited<ReturnType<typeof createAuthServerClient>>,
   path: string,
@@ -78,6 +87,8 @@ export async function createProject(_prevState: FormState, formData: FormData): 
     }
   }
 
+  const fieldDefinitions = await getFieldDefinitions(supabase);
+
   const { error } = await supabase.from("projects").insert({
     title,
     status: (str(formData, "status") ?? "in_progress") as ProjectStatus,
@@ -90,6 +101,7 @@ export async function createProject(_prevState: FormState, formData: FormData): 
     live_url: str(formData, "live_url"),
     repo_url: str(formData, "repo_url"),
     team_note: str(formData, "team_note"),
+    custom_fields: buildCustomFieldsPayload(fieldDefinitions, formData),
   });
 
   if (error) return { error: error.message };
@@ -134,6 +146,8 @@ export async function updateProject(_prevState: FormState, formData: FormData): 
     imagePath = null;
   }
 
+  const fieldDefinitions = await getFieldDefinitions(supabase);
+
   const { error } = await supabase
     .from("projects")
     .update({
@@ -148,6 +162,7 @@ export async function updateProject(_prevState: FormState, formData: FormData): 
       live_url: str(formData, "live_url"),
       repo_url: str(formData, "repo_url"),
       team_note: str(formData, "team_note"),
+      custom_fields: buildCustomFieldsPayload(fieldDefinitions, formData),
     })
     .eq("id", id);
 

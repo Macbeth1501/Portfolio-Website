@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
+import { buildCustomFieldsPayload } from "@/lib/customFields";
 
 export type FormState = { error: string } | null;
 
@@ -28,6 +29,11 @@ function str(formData: FormData, key: string): string | null {
   return trimmed.length > 0 ? trimmed : null;
 }
 
+async function getFieldDefinitions(supabase: Awaited<ReturnType<typeof createAuthServerClient>>) {
+  const { data } = await supabase!.from("field_definitions").select("key, label, type").eq("content_type", "skill");
+  return data ?? [];
+}
+
 export async function createSkill(_prevState: FormState, formData: FormData): Promise<FormState> {
   let supabase;
   try {
@@ -40,7 +46,10 @@ export async function createSkill(_prevState: FormState, formData: FormData): Pr
   const group = str(formData, "group");
   if (!name || !group) return { error: "Name and group are required." };
 
-  const { error } = await supabase.from("skills").insert({ name, group });
+  const fieldDefinitions = await getFieldDefinitions(supabase);
+  const { error } = await supabase
+    .from("skills")
+    .insert({ name, group, custom_fields: buildCustomFieldsPayload(fieldDefinitions, formData) });
   if (error) return { error: error.message };
 
   revalidatePath("/admin/skills");
@@ -63,7 +72,11 @@ export async function updateSkill(_prevState: FormState, formData: FormData): Pr
   const group = str(formData, "group");
   if (!name || !group) return { error: "Name and group are required." };
 
-  const { error } = await supabase.from("skills").update({ name, group }).eq("id", id);
+  const fieldDefinitions = await getFieldDefinitions(supabase);
+  const { error } = await supabase
+    .from("skills")
+    .update({ name, group, custom_fields: buildCustomFieldsPayload(fieldDefinitions, formData) })
+    .eq("id", id);
   if (error) return { error: error.message };
 
   revalidatePath("/admin/skills");

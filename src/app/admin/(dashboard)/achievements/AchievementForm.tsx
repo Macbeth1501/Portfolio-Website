@@ -2,13 +2,21 @@
 
 import { useActionState } from "react";
 import type { Achievement } from "@/lib/types";
+import type { CustomFieldDef } from "@/lib/customFields";
 import { SubmitButton } from "@/components/admin/SubmitButton";
+import { CustomFieldInputs } from "@/components/admin/CustomFieldInputs";
 import { createAchievement, updateAchievement, type FormState } from "./actions";
 
 const inputClass = "rounded-sm border border-line bg-paper px-3 py-2 text-ink";
 const labelClass = "text-sm text-ink-muted";
 
-export function AchievementForm({ achievement }: { achievement?: Achievement & { id: string } }) {
+export function AchievementForm({
+  achievement,
+  fieldDefinitions,
+}: {
+  achievement?: Achievement & { id: string };
+  fieldDefinitions: CustomFieldDef[];
+}) {
   const isEdit = Boolean(achievement);
   const action = isEdit ? updateAchievement : createAchievement;
   const [state, formAction] = useActionState<FormState, FormData>(action, null);
@@ -44,6 +52,8 @@ export function AchievementForm({ achievement }: { achievement?: Achievement & {
         </label>
         <input id="date" name="date" defaultValue={achievement?.date} className={inputClass} />
       </div>
+
+      <CustomFieldInputs definitions={fieldDefinitions} values={achievement?.customFields} />
 
       {state?.error ? <p className="text-sm text-amber-deep">{state.error}</p> : null}
 

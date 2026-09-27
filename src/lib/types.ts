@@ -1,6 +1,8 @@
 /** Shared content types — mirror the DB columns in supabase/schema.sql
  * (Section 5 of SPEC.md) so seed data and live DB reads share one shape. */
 
+import type { CustomFieldValue } from "./customFields";
+
 export type ProjectStatus = "live" | "in_progress" | "archived";
 
 export type Project = {
@@ -16,6 +18,7 @@ export type Project = {
   liveUrl?: string;
   repoUrl?: string;
   teamNote?: string;
+  customFields?: CustomFieldValue[];
 };
 
 export type Experience = {
@@ -25,6 +28,7 @@ export type Experience = {
   locationType: "on_site" | "remote" | "hybrid";
   description: string;
   mentors?: string[];
+  customFields?: CustomFieldValue[];
 };
 
 export type SkillGroup = {
@@ -37,6 +41,7 @@ export type Achievement = {
   result: string;
   context: string;
   date: string;
+  customFields?: CustomFieldValue[];
 };
 
 export type Hero = {

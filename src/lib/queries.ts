@@ -82,6 +82,7 @@ export async function getSiteContent(): Promise<{ content: SiteContent; error: s
     locationType: row.location_type,
     description: row.description ?? "",
     mentors: row.mentors ?? [],
+    customFields: row.custom_fields ?? [],
   }));
 
   const projects: Project[] = (projectRows.data ?? []).map((row) => ({
@@ -97,6 +98,7 @@ export async function getSiteContent(): Promise<{ content: SiteContent; error: s
     liveUrl: row.live_url ?? undefined,
     repoUrl: row.repo_url ?? undefined,
     teamNote: row.team_note ?? undefined,
+    customFields: row.custom_fields ?? [],
   }));
 
   const skillGroups: SkillGroup[] = [];
@@ -114,6 +116,7 @@ export async function getSiteContent(): Promise<{ content: SiteContent; error: s
     result: row.result ?? "",
     context: row.context ?? "",
     date: row.date ?? "",
+    customFields: row.custom_fields ?? [],
   }));
 
   return {

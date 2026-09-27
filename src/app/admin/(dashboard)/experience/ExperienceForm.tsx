@@ -2,13 +2,21 @@
 
 import { useActionState } from "react";
 import type { Experience } from "@/lib/types";
+import type { CustomFieldDef } from "@/lib/customFields";
 import { SubmitButton } from "@/components/admin/SubmitButton";
+import { CustomFieldInputs } from "@/components/admin/CustomFieldInputs";
 import { createExperience, updateExperience, type FormState } from "./actions";
 
 const inputClass = "rounded-sm border border-line bg-paper px-3 py-2 text-ink";
 const labelClass = "text-sm text-ink-muted";
 
-export function ExperienceForm({ experience }: { experience?: Experience & { id: string } }) {
+export function ExperienceForm({
+  experience,
+  fieldDefinitions,
+}: {
+  experience?: Experience & { id: string };
+  fieldDefinitions: CustomFieldDef[];
+}) {
   const isEdit = Boolean(experience);
   const action = isEdit ? updateExperience : createExperience;
   const [state, formAction] = useActionState<FormState, FormData>(action, null);
@@ -90,6 +98,8 @@ export function ExperienceForm({ experience }: { experience?: Experience & { id:
           className={inputClass}
         />
       </div>
+
+      <CustomFieldInputs definitions={fieldDefinitions} values={experience?.customFields} />
 
       {state?.error ? <p className="text-sm text-amber-deep">{state.error}</p> : null}
 

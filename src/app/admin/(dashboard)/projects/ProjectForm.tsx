@@ -2,13 +2,21 @@
 
 import { useActionState, useState } from "react";
 import type { Project } from "@/lib/types";
+import type { CustomFieldDef } from "@/lib/customFields";
 import { SubmitButton } from "@/components/admin/SubmitButton";
+import { CustomFieldInputs } from "@/components/admin/CustomFieldInputs";
 import { createProject, updateProject, type FormState } from "./actions";
 
 const inputClass = "rounded-sm border border-line bg-paper px-3 py-2 text-ink";
 const labelClass = "text-sm text-ink-muted";
 
-export function ProjectForm({ project }: { project?: Project & { id: string; imagePath?: string | null } }) {
+export function ProjectForm({
+  project,
+  fieldDefinitions,
+}: {
+  project?: Project & { id: string; imagePath?: string | null };
+  fieldDefinitions: CustomFieldDef[];
+}) {
   const isEdit = Boolean(project);
   const action = isEdit ? updateProject : createProject;
   const [state, formAction] = useActionState<FormState, FormData>(action, null);
@@ -121,6 +129,8 @@ export function ProjectForm({ project }: { project?: Project & { id: string; ima
         </label>
         <input id="team_note" name="team_note" defaultValue={project?.teamNote} className={inputClass} />
       </div>
+
+      <CustomFieldInputs definitions={fieldDefinitions} values={project?.customFields} />
 
       {state?.error ? <p className="text-sm text-amber-deep">{state.error}</p> : null}
 

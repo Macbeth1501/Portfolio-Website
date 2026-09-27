@@ -1,4 +1,5 @@
 import type { Achievement } from "@/lib/types";
+import { CustomFieldsList } from "./CustomFieldsList";
 
 export function AchievementsSection({ achievements }: { achievements: Achievement[] }) {
   if (achievements.length === 0) return null;
@@ -23,6 +24,7 @@ export function AchievementsSection({ achievements }: { achievements: Achievemen
             {achievement.context ? (
               <p className="mt-1 max-w-[68ch] text-sm text-ink-muted">{achievement.context}</p>
             ) : null}
+            <CustomFieldsList fields={achievement.customFields} />
           </li>
         ))}
       </ul>
