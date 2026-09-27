@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/*
+ * "The Working Profile" design tokens — see SPEC.md Section 3.2.
+ * This is only the token foundation for Phase 1's pipeline check.
+ * The real visual design pass happens in Phase 2 with Impeccable.
+ */
+:root {
+  --ink: #152a43; /* primary text, headings */
+  --paper: #fbf9f4; /* page background — warm off-white */
+  --blue: #2c5f8a; /* primary accent — links, section markers, primary buttons, nav */
+  --blue-deep: #1d4568; /* hover/active state of blue */
+  --amber: #e8a93b; /* sparing use only — one highlighted stat, a "current" badge */
+  --green: #3a8069; /* reserved for measured outcomes: result metrics, "live" badges */
+  --line: #dcd6c7; /* hairline rule / divider — warm grey-beige */
+  --ink-muted: #5b6b7d; /* secondary/supporting text */
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-blue: var(--blue);
+  --color-blue-deep: var(--blue-deep);
+  --color-amber: var(--amber);
+  --color-green: var(--green);
+  --color-line: var(--line);
+  --color-ink-muted: var(--ink-muted);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-inter), sans-serif;
+  line-height: 1.6;
+}
+
+/* Accessibility floor (SPEC.md 3.6): visible keyboard focus on every
+   interactive element — never strip the outline without a replacement. */
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
