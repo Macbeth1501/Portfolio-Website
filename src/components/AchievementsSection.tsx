@@ -29,7 +29,7 @@ export function AchievementsSection({ achievements }: { achievements: Achievemen
                 }`}
               >
                 {isMeasured(achievement.result) ? <BenchmarkMark /> : null}
-                {achievement.result}
+                <span className="min-w-0 [overflow-wrap:anywhere]">{achievement.result}</span>
               </p>
               <p className="mt-1 text-ink">{achievement.title}</p>
               {achievement.context ? (

@@ -131,6 +131,7 @@ create table if not exists site_settings (
   photo_path text,
   snapshot_stats jsonb not null default '[]', -- ordered [{ "label": "...", "value": "..." }]
   contact_links jsonb not null default '[]',  -- [{ "label": "...", "url": "..." }]
+  section_order jsonb not null default '["experience","achievements","projects","skills"]', -- homepage section order
   updated_at timestamptz not null default now()
 );
 

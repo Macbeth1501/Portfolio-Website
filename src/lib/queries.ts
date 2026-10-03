@@ -1,5 +1,6 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { normalizeUrl, readLinks } from "@/lib/url";
+import { normalizeSectionOrder, type SectionKey } from "@/lib/sections";
 import type { Achievement, Experience, FooterLink, Hero, Project, Skill, SkillGroup, SnapshotStat } from "@/lib/types";
 
 export type SiteContent = {
@@ -10,6 +11,7 @@ export type SiteContent = {
   projects: Project[];
   skillGroups: SkillGroup[];
   achievements: Achievement[];
+  sectionOrder: SectionKey[];
 };
 
 const EMPTY_CONTENT: SiteContent = {
@@ -20,6 +22,7 @@ const EMPTY_CONTENT: SiteContent = {
   projects: [],
   skillGroups: [],
   achievements: [],
+  sectionOrder: normalizeSectionOrder(null),
 };
 
 /** Reads every public-site content type from Supabase in one pass. Returns
@@ -123,7 +126,16 @@ export async function getSiteContent(): Promise<{ content: SiteContent; error: s
   }));
 
   return {
-    content: { hero, snapshotStats, footerLinks, experience, projects, skillGroups, achievements },
+    content: {
+      hero,
+      snapshotStats,
+      footerLinks,
+      experience,
+      projects,
+      skillGroups,
+      achievements,
+      sectionOrder: normalizeSectionOrder(siteSettings.data.section_order),
+    },
     error: null,
   };
 }

@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+import { SECTION_LABELS, type SectionKey } from "@/lib/sections";
 import { Hero } from "@/components/Hero";
 import { Legend } from "@/components/Legend";
 import type { SectionLink } from "@/components/SectionNav";
@@ -15,17 +17,25 @@ export default async function Home() {
   const { content, error } = await getSiteContent();
   if (error) console.error(error);
 
-  const sections: (SectionLink & { present: boolean })[] = [
-    { id: "experience", label: "Experience", present: content.experience.length > 0 },
-    { id: "achievements", label: "Achievements", present: content.achievements.length > 0 },
-    { id: "projects", label: "Projects", present: content.projects.length > 0 },
-    { id: "skills", label: "Skills", present: content.skillGroups.length > 0 },
-    {
-      id: "contact",
-      label: "Contact",
-      present: content.footerLinks.some((link) => link.url.toLowerCase().startsWith("mailto:")),
-    },
-  ];
+  const present: Record<SectionKey, boolean> = {
+    experience: content.experience.length > 0,
+    achievements: content.achievements.length > 0,
+    projects: content.projects.length > 0,
+    skills: content.skillGroups.length > 0,
+  };
+  const rendered: Record<SectionKey, React.ReactNode> = {
+    experience: <ExperienceSection experience={content.experience} />,
+    achievements: <AchievementsSection achievements={content.achievements} />,
+    projects: <ProjectsSection projects={content.projects} />,
+    skills: <SkillsSection skillGroups={content.skillGroups} />,
+  };
+
+  const sections: SectionLink[] = content.sectionOrder
+    .filter((key) => present[key])
+    .map((key) => ({ id: key, label: SECTION_LABELS[key] }));
+  if (content.footerLinks.some((link) => link.url.toLowerCase().startsWith("mailto:"))) {
+    sections.push({ id: "contact", label: "Contact" });
+  }
 
   return (
     <div className="sheet mx-auto my-3 w-[calc(100%-1.5rem)] max-w-5xl xl:max-w-6xl sm:my-8 sm:w-[calc(100%-4rem)]">
@@ -36,12 +46,11 @@ export default async function Home() {
         </p>
       ) : null}
 
-      <Hero hero={content.hero} sections={sections.filter((section) => section.present)} />
+      <Hero hero={content.hero} sections={sections} />
       <Legend stats={content.snapshotStats} links={content.footerLinks} />
-      <ExperienceSection experience={content.experience} />
-      <AchievementsSection achievements={content.achievements} />
-      <ProjectsSection projects={content.projects} />
-      <SkillsSection skillGroups={content.skillGroups} />
+      {content.sectionOrder.map((key) => (
+        <Fragment key={key}>{rendered[key]}</Fragment>
+      ))}
       <ContactSection links={content.footerLinks} />
       <SiteFooter links={content.footerLinks} />
     </main>

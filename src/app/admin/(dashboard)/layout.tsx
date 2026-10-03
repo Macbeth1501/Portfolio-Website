@@ -37,6 +37,7 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
           ["/admin/experience", "Experience"],
           ["/admin/skills", "Skills"],
           ["/admin/achievements", "Achievements"],
+          ["/admin/sections", "Section order"],
           ["/admin/fields", "Fields"],
           ["/admin/settings", "Site settings"],
         ].map(([href, label]) => (
