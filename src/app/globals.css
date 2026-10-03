@@ -1,22 +1,27 @@
 @import "tailwindcss";
 
-/* "The Working Profile" design tokens — see DESIGN.md. */
+/* "Survey Sheet" design tokens — see DESIGN.md. Colours are map inks on a
+   cool pale sheet: survey blue-black text, hydrography blue, vegetation green,
+   road amber, contour brown. */
 :root {
-  --ink: #152a43; /* primary text, headings */
-  --paper: #fbf9f4; /* page background — warm off-white */
-  --blue: #2c5f8a; /* primary accent — links, section markers, primary buttons, nav */
-  --blue-deep: #1d4568; /* hover/active state of blue */
-  --amber: #e8a93b; /* sparing use only — one highlighted stat, a "current" badge */
-  --amber-deep: #906925; /* amber, darkened for text on paper — #e8a93b is 1.96:1 on paper, fails AA */
-  --green: #3a8069; /* reserved for measured outcomes: result metrics, "live" badges */
-  --green-deep: #397d67; /* green, darkened slightly for text on paper — #3a8069 is 4.46:1, just under AA */
-  --line: #dcd6c7; /* hairline rule / divider — warm grey-beige */
-  --ink-muted: #5b6b7d; /* secondary/supporting text */
+  --ink: #12202e; /* survey ink: text, headings, neatline */
+  --paper: #f3f5f2; /* the sheet — cool pale grey-white, not cream */
+  --paper-deep: #e9eeea; /* plate and hover ground, one step down from the sheet */
+  --blue: #2a6f9e; /* hydrography blue: links, focus, active */
+  --blue-deep: #1b4f75; /* hover/active state of blue */
+  --amber: #d99a2b; /* road amber: borders/accents only, never text */
+  --amber-deep: #8a5a12; /* amber darkened for text on the sheet */
+  --green: #3f7d58; /* vegetation green: measured outcomes */
+  --green-deep: #2f6446; /* green darkened for text on the sheet */
+  --line: #c9d1cb; /* hairline rule */
+  --ink-muted: #55626e; /* secondary text */
+  --contour: #b08d63; /* contour-line brown: decorative linework only */
 }
 
 @theme inline {
   --color-ink: var(--ink);
   --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
   --color-blue: var(--blue);
   --color-blue-deep: var(--blue-deep);
   --color-amber: var(--amber);
@@ -25,21 +30,68 @@
   --color-green-deep: var(--green-deep);
   --color-line: var(--line);
   --color-ink-muted: var(--ink-muted);
+  --color-contour: var(--contour);
 
-  --font-display: var(--font-fraunces);
-  --font-sans: var(--font-inter);
+  --font-display: var(--font-archivo);
+  --font-sans: var(--font-public-sans);
   --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-public-sans), sans-serif;
   line-height: 1.6;
 }
 
-/* Accessibility floor (SPEC.md 3.6): visible keyboard focus on every
-   interactive element — never strip the outline without a replacement. */
+body:has(.sheet) {
+  background: var(--paper-deep);
+}
+
+::selection {
+  background: var(--blue);
+  color: var(--paper);
+}
+
+/* The sheet: a neatline double border with graticule ticks along the top
+   and left edges. The admin pages don't use it. */
+.sheet {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  outline: 1px solid var(--ink);
+  outline-offset: -6px;
+}
+
+.sheet::before,
+.sheet::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ticks every 4rem along the top edge, between the two lines. */
+.sheet::before {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-image: repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 4rem);
+  opacity: 0.55;
+}
+
+/* Ticks along the left edge. */
+.sheet::after {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 5px;
+  background-image: repeating-linear-gradient(180deg, var(--ink) 0 1px, transparent 1px 4rem);
+  opacity: 0.55;
+}
+
+/* Accessibility floor: visible keyboard focus on every interactive element. */
 :focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
@@ -57,8 +109,8 @@ body {
   }
 }
 
-/* The one deliberate entrance sequence (SPEC.md 3.5): hero name/photo settle
-   into place together on load. Nothing else in the page animates on scroll. */
+/* The page's one authored moment: the title block settles in while the
+   contour lines draw behind it. Nothing else animates on scroll. */
 @keyframes hero-settle {
   from {
     opacity: 0;
@@ -77,4 +129,19 @@ body {
 .hero-settle-delay {
   animation: hero-settle 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: 90ms;
+}
+
+@keyframes contour-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.contour-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: contour-draw 1100ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }

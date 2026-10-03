@@ -1,5 +1,6 @@
 import type { Experience } from "@/lib/types";
 import { CustomFieldsList } from "./CustomFieldsList";
+import { SectionHeading } from "./SectionHeading";
 
 const locationLabel: Record<string, string> = {
   on_site: "On-site",
@@ -12,14 +13,9 @@ export function ExperienceSection({ experience }: { experience: Experience[] }) 
 
   return (
     <section id="experience" aria-labelledby="experience-heading" className="mt-16 scroll-mt-8 sm:mt-24">
-      <h2
-        id="experience-heading"
-        className="font-[family-name:var(--font-display)] text-2xl font-medium text-ink sm:text-3xl"
-      >
-        Experience
-      </h2>
+      <SectionHeading id="experience-heading">Experience</SectionHeading>
 
-      <ul className="mt-6 divide-y divide-line border-t border-line">
+      <ul className="mt-6 divide-y divide-line">
         {experience.map((entry) => (
           <li
             key={`${entry.organization}-${entry.roleTitle}`}

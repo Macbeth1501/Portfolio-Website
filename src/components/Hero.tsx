@@ -1,38 +1,53 @@
 import Image from "next/image";
-import type { FooterLink, Hero as HeroData } from "@/lib/types";
-import { linkClass } from "./linkClass";
+import type { Hero as HeroData } from "@/lib/types";
+import { HeroContours } from "./HeroContours";
+import { SectionNav, type SectionLink } from "./SectionNav";
 
-export function Hero({ hero, links }: { hero: HeroData; links: FooterLink[] }) {
+/** Corner registration marks around the photo plate, like a print register. */
+function RegistrationMarks() {
+  const mark = "absolute h-3 w-3 border-ink/60";
   return (
-    <section aria-label="Introduction" className="flex flex-col gap-6 pt-16 sm:flex-row sm:items-start sm:gap-10 sm:pt-24">
-      <div className="flex-1">
-        <h1 className="hero-settle font-[family-name:var(--font-display)] text-4xl font-semibold text-ink sm:text-6xl">
+    <>
+      <span aria-hidden="true" className={`${mark} -top-2 -left-2 border-t border-l`} />
+      <span aria-hidden="true" className={`${mark} -top-2 -right-2 border-t border-r`} />
+      <span aria-hidden="true" className={`${mark} -bottom-2 -left-2 border-b border-l`} />
+      <span aria-hidden="true" className={`${mark} -right-2 -bottom-2 border-r border-b`} />
+    </>
+  );
+}
+
+export function Hero({ hero, sections }: { hero: HeroData; sections: SectionLink[] }) {
+  return (
+    <section
+      aria-label="Introduction"
+      className="relative isolate grid gap-8 pt-14 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-10 md:pt-20"
+    >
+      <HeroContours />
+
+      <div>
+        <h1 className="hero-settle font-[family-name:var(--font-display)] text-5xl font-bold leading-[1.02] text-ink sm:text-7xl">
           {hero.fullName}
         </h1>
-        <p className="hero-settle-delay mt-3 text-base text-blue">{hero.roleLine}</p>
-        <p className="hero-settle-delay mt-5 max-w-[62ch] text-base text-ink sm:text-lg">{hero.bio}</p>
-        {links.length > 0 ? (
-          <nav aria-label="Contact" className="hero-settle-delay mt-3 flex flex-wrap gap-x-6 text-sm">
-            {links.map((link) => (
-              <a key={link.label} href={link.url} className={linkClass}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        ) : null}
+        <p className="hero-settle-delay mt-4 text-base font-medium text-blue">{hero.roleLine}</p>
+        <p className="hero-settle-delay mt-5 max-w-[60ch] text-base text-ink sm:text-lg">{hero.bio}</p>
       </div>
 
-      {hero.photo ? (
-        <div className="hero-settle-delay relative h-48 w-40 shrink-0 self-start overflow-hidden sm:mt-2 sm:ml-auto sm:h-56 sm:w-44">
-          <Image
-            src={hero.photo}
-            alt={`Portrait of ${hero.fullName}`}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-      ) : null}
+      <div className="hero-settle-delay flex flex-col gap-6 sm:flex-row sm:items-start md:flex-col">
+        {hero.photo ? (
+          <div className="relative h-52 w-44 shrink-0 md:h-64 md:w-full">
+            <RegistrationMarks />
+            <Image
+              src={hero.photo}
+              alt={`Portrait of ${hero.fullName}`}
+              fill
+              sizes="(min-width: 768px) 240px, 176px"
+              className="border border-ink/40 object-cover"
+              priority
+            />
+          </div>
+        ) : null}
+        <SectionNav sections={sections} />
+      </div>
     </section>
   );
 }

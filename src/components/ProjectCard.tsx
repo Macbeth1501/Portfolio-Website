@@ -4,6 +4,8 @@ import { isMeasured } from "@/lib/measured";
 import { StatusBadge } from "./StatusBadge";
 import { CustomFieldsList } from "./CustomFieldsList";
 import { linkClass } from "./linkClass";
+import { ContourPlate } from "./ContourPlate";
+import { BenchmarkMark } from "./BenchmarkMark";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
@@ -16,11 +18,15 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
 
       <div className="mt-3 md:mt-0">
-        {project.imageUrl ? (
-          <div className="relative mb-4 h-48 w-full overflow-hidden sm:h-64">
-            <Image src={project.imageUrl} alt={`Screenshot of ${project.title}`} fill className="object-cover" />
-          </div>
-        ) : null}
+        <div className="mb-4">
+          {project.imageUrl ? (
+            <div className="relative h-48 w-full overflow-hidden border border-line sm:h-64">
+              <Image src={project.imageUrl} alt={`Screenshot of ${project.title}`} fill className="object-cover" />
+            </div>
+          ) : (
+            <ContourPlate seed={project.slug} />
+          )}
+        </div>
 
         <h3 className="max-w-[52ch] text-lg font-medium text-ink">{project.title}</h3>
 
@@ -37,22 +43,27 @@ export function ProjectCard({ project }: { project: Project }) {
             <div>
               <dt className="text-xs text-ink-muted">Result</dt>
               <dd
-                className={`mt-1 max-w-[68ch] text-base ${
-                  isMeasured(project.result) ? "font-mono text-green-deep" : "text-ink"
+                className={`mt-1 flex max-w-[68ch] items-start gap-2 text-base ${
+                  !isMeasured(project.result)
+                    ? "text-ink"
+                    : project.result.length <= 40
+                      ? "font-mono text-green-deep"
+                      : "text-green-deep"
                 }`}
               >
-                {project.result}
+                {isMeasured(project.result) ? <BenchmarkMark className="mt-1.5" /> : null}
+                <span>{project.result}</span>
               </dd>
             </div>
           ) : null}
         </dl>
 
         {project.techStack.length > 0 ? (
-          <ul className="mt-4 flex flex-wrap gap-2">
+          <ul className="mt-4 flex flex-wrap gap-x-2 gap-y-1">
             {project.techStack.map((tag) => (
               <li
                 key={tag}
-                className="rounded-sm border border-line px-2 py-0.5 font-mono text-xs text-ink-muted"
+                className="text-sm text-ink-muted after:content-[','] last:after:content-none"
               >
                 {tag}
               </li>

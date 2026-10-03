@@ -1,6 +1,6 @@
 import { Hero } from "@/components/Hero";
-import { SnapshotStrip } from "@/components/SnapshotStrip";
-import { SectionNav, type SectionLink } from "@/components/SectionNav";
+import { Legend } from "@/components/Legend";
+import type { SectionLink } from "@/components/SectionNav";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { SkillsSection } from "@/components/SkillsSection";
@@ -22,24 +22,22 @@ export default async function Home() {
   ];
 
   return (
-    <main id="main" className="mx-auto w-full max-w-4xl px-6 pb-24 sm:px-8">
+    <div className="sheet mx-auto my-3 w-[calc(100%-1.5rem)] max-w-5xl sm:my-8 sm:w-[calc(100%-4rem)]">
+    <main id="main" className="px-5 pb-16 sm:px-10">
       {error ? (
-        <p className="mt-8 max-w-xl text-ink-muted">
-          <span className="text-amber-deep" aria-hidden="true">
-            ⚠
-          </span>{" "}
+        <p className="mt-8 max-w-xl text-amber-deep">
           Some content could not be loaded right now. Please try again shortly.
         </p>
       ) : null}
 
-      <Hero hero={content.hero} links={content.footerLinks} />
-      <SnapshotStrip stats={content.snapshotStats} />
-      <SectionNav sections={sections.filter((section) => section.present)} />
+      <Hero hero={content.hero} sections={sections.filter((section) => section.present)} />
+      <Legend stats={content.snapshotStats} links={content.footerLinks} />
       <ExperienceSection experience={content.experience} />
       <AchievementsSection achievements={content.achievements} />
       <ProjectsSection projects={content.projects} />
       <SkillsSection skillGroups={content.skillGroups} />
       <SiteFooter links={content.footerLinks} />
     </main>
+    </div>
   );
 }

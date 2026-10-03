@@ -1,96 +1,364 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-27T00:00:00Z",
+  "generatedAt": "2026-10-03T05:33:59.277Z",
   "title": "Design System: Rochan Awasthi Portfolio",
   "extensions": {
     "colorMeta": {
-      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#152a43" },
-      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#fbf9f4" },
-      "blue": { "role": "primary", "displayName": "Signal Blue", "canonical": "#2c5f8a" },
-      "blue-deep": { "role": "primary", "displayName": "Signal Blue Deep", "canonical": "#1d4568" },
-      "amber": { "role": "secondary", "displayName": "Ledger Amber", "canonical": "#e8a93b" },
-      "amber-deep": { "role": "secondary", "displayName": "Ledger Amber Deep (text-safe)", "canonical": "#906925" },
-      "green": { "role": "tertiary", "displayName": "Result Green", "canonical": "#3a8069" },
-      "green-deep": { "role": "tertiary", "displayName": "Result Green Deep (text-safe)", "canonical": "#397d67" },
-      "line": { "role": "neutral", "displayName": "Hairline", "canonical": "#dcd6c7" },
-      "ink-muted": { "role": "neutral", "displayName": "Ink Muted", "canonical": "#5b6b7d" }
+      "ink": {
+        "role": "text",
+        "displayName": "Survey Ink",
+        "canonical": "#12202e",
+        "tonalRamp": [
+          "#05080c",
+          "#080e15",
+          "#0c151e",
+          "#0f1b27",
+          "#404b56",
+          "#707981",
+          "#a1a7ac",
+          "#d2d5d7"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Cool Sheet",
+        "canonical": "#f3f5f2",
+        "tonalRamp": [
+          "#3e3e3e",
+          "#6d6e6d",
+          "#9c9e9c",
+          "#cccdcb",
+          "#f5f7f5",
+          "#f8f9f7",
+          "#fafbfa",
+          "#fdfdfd"
+        ]
+      },
+      "paper-deep": {
+        "role": "neutral",
+        "displayName": "Plate Grey",
+        "canonical": "#e9eeea",
+        "tonalRamp": [
+          "#3b3d3c",
+          "#696b69",
+          "#969997",
+          "#c3c7c4",
+          "#edf1ee",
+          "#f2f5f2",
+          "#f6f8f7",
+          "#fbfcfb"
+        ]
+      },
+      "blue": {
+        "role": "primary",
+        "displayName": "Hydrography Blue",
+        "canonical": "#2a6f9e",
+        "tonalRamp": [
+          "#0b1c28",
+          "#133247",
+          "#1b4766",
+          "#235d84",
+          "#538bb1",
+          "#7fa8c5",
+          "#abc6d9",
+          "#d7e4ed"
+        ]
+      },
+      "blue-deep": {
+        "role": "primary",
+        "displayName": "Deep Hydrography",
+        "canonical": "#1b4f75",
+        "tonalRamp": [
+          "#07141e",
+          "#0c2335",
+          "#11334b",
+          "#174262",
+          "#477190",
+          "#7695ac",
+          "#a5b9c8",
+          "#d4dee5"
+        ]
+      },
+      "amber": {
+        "role": "secondary",
+        "displayName": "Road Amber",
+        "canonical": "#d99a2b",
+        "tonalRamp": [
+          "#37270b",
+          "#614513",
+          "#8c631c",
+          "#b68124",
+          "#e0ad54",
+          "#e8c27f",
+          "#f0d7ab",
+          "#f8ecd7"
+        ]
+      },
+      "amber-deep": {
+        "role": "secondary",
+        "displayName": "Amber Ink",
+        "canonical": "#8a5a12",
+        "tonalRamp": [
+          "#231705",
+          "#3e2808",
+          "#593a0c",
+          "#744b0f",
+          "#a17a40",
+          "#b99c70",
+          "#d1bea1",
+          "#e9e0d2"
+        ]
+      },
+      "green": {
+        "role": "tertiary",
+        "displayName": "Vegetation Green",
+        "canonical": "#3f7d58",
+        "tonalRamp": [
+          "#102016",
+          "#1c3828",
+          "#295039",
+          "#35694a",
+          "#649678",
+          "#8cb19b",
+          "#b3ccbd",
+          "#dbe6df"
+        ]
+      },
+      "green-deep": {
+        "role": "tertiary",
+        "displayName": "Green Ink",
+        "canonical": "#2f6446",
+        "tonalRamp": [
+          "#0c1a12",
+          "#152d1f",
+          "#1e402d",
+          "#27543b",
+          "#57826a",
+          "#82a290",
+          "#adc2b6",
+          "#d7e2dc"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline Grey",
+        "canonical": "#c9d1cb",
+        "tonalRamp": [
+          "#333534",
+          "#5a5e5b",
+          "#818783",
+          "#a8afaa",
+          "#d3dad5",
+          "#dfe3e0",
+          "#eaedea",
+          "#f5f6f5"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "#55626e",
+        "tonalRamp": [
+          "#16191c",
+          "#262c31",
+          "#373f47",
+          "#47525c",
+          "#76808a",
+          "#99a1a8",
+          "#bcc1c6",
+          "#dfe1e3"
+        ]
+      },
+      "contour": {
+        "role": "decorative",
+        "displayName": "Contour Brown",
+        "canonical": "#b08d63",
+        "tonalRamp": [
+          "#2d2419",
+          "#4f3f2c",
+          "#715b40",
+          "#937653",
+          "#bfa381",
+          "#cfbaa1",
+          "#e0d2c1",
+          "#f0e9e1"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero name only." },
-      "body": { "displayName": "Body", "purpose": "Paragraphs, nav, buttons, labels." },
-      "mono": { "displayName": "Mono", "purpose": "Dates, tech-stack tags, and measured metrics only." }
+      "display": {
+        "displayName": "Sheet Title",
+        "purpose": "The name only, Archivo 700."
+      },
+      "headline": {
+        "displayName": "Panel Heading",
+        "purpose": "Section headings with a trailing map-line rule."
+      },
+      "title": {
+        "displayName": "Entry Title",
+        "purpose": "Role and project titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose at up to 68ch."
+      },
+      "label": {
+        "displayName": "Caption",
+        "purpose": "Legend and Problem/Approach/Result captions, sentence case."
+      },
+      "spot-height": {
+        "displayName": "Spot Height",
+        "purpose": "Short measured results in green mono."
+      },
+      "data": {
+        "displayName": "Data",
+        "purpose": "Dates, status, coordinates."
+      }
     },
     "shadows": [],
     "motion": [
-      { "name": "hero-settle", "value": "450ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The single hero entrance: name and photo settle into place together on load. Disabled under prefers-reduced-motion." }
+      {
+        "name": "hero-settle",
+        "value": "450ms cubic-bezier(0.16, 1, 0.3, 1) both; translateY(14px) to 0, opacity 0 to 1; secondary elements delayed 90ms",
+        "purpose": "Title block and right column settle in on load."
+      },
+      {
+        "name": "contour-draw",
+        "value": "1100ms cubic-bezier(0.16, 1, 0.3, 1) backwards; stroke-dashoffset 1 to 0; 70ms stagger per ring",
+        "purpose": "Hero contours draw in once on load."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all animation and transition durations collapse to 0.001ms",
+        "purpose": "prefers-reduced-motion floor."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" }
-    ]
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      }
+    ],
+    "neatline": {
+      "value": "border: 1px solid var(--ink); outline: 1px solid var(--ink); outline-offset: -6px; ticks every 4rem at 55% opacity",
+      "purpose": "Sheet double border with graticule ticks."
+    }
   },
   "components": [
     {
-      "name": "Status Badge — Live",
-      "kind": "chip",
-      "refersTo": "status-badge-live",
-      "description": "Marks a project as live/deployed.",
-      "html": "<span class=\"ds-status-badge ds-status-live\">Live</span>",
-      "css": ".ds-status-badge { display: inline-flex; align-items: center; border-radius: 2px; border-width: 1px; border-style: solid; padding: 2px 8px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; } .ds-status-live { color: #397d67; border-color: rgba(58, 128, 105, 0.4); }"
+      "name": "Sheet Index",
+      "kind": "nav",
+      "refersTo": "sheet-index-cell",
+      "description": "2x2 grid of section links built from 1px gaps over an ink ground.",
+      "html": "<nav class=\"ds-index\"><p class=\"ds-index-cap\">Sheet index</p><ul class=\"ds-index-grid\"><li><a href=\"#\">Experience</a></li><li><a href=\"#\">Achievements</a></li><li><a href=\"#\">Projects</a></li><li><a href=\"#\">Skills</a></li></ul></nav>",
+      "css": ".ds-index{width:15rem;font-family:'Public Sans',sans-serif}.ds-index-cap{margin:0;font-size:12px;color:var(--ink-muted,#55626e)}.ds-index-grid{list-style:none;margin:4px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:1px;border:1px solid rgba(18,32,46,.4);background:rgba(18,32,46,.4)}.ds-index-grid li{background:var(--paper,#f3f5f2)}.ds-index-grid a{display:flex;align-items:center;min-height:44px;padding:0 12px;font-size:14px;color:var(--blue,#2a6f9e);text-underline-offset:2px;text-decoration:none}.ds-index-grid a:hover{background:var(--paper-deep,#e9eeea);color:var(--blue-deep,#1b4f75);text-decoration:underline}.ds-index-grid a:focus-visible{outline:2px solid var(--blue,#2a6f9e);outline-offset:2px;border-radius:2px}"
     },
     {
-      "name": "Status Badge — In Progress",
-      "kind": "chip",
-      "refersTo": "status-badge-in_progress",
-      "description": "Marks a project as actively in progress.",
-      "html": "<span class=\"ds-status-badge ds-status-in-progress\">In progress</span>",
-      "css": ".ds-status-badge { display: inline-flex; align-items: center; border-radius: 2px; border-width: 1px; border-style: solid; padding: 2px 8px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; } .ds-status-in-progress { color: #906925; border-color: rgba(232, 169, 59, 0.4); }"
-    },
-    {
-      "name": "Tag Chip",
-      "kind": "chip",
-      "refersTo": "tag-chip",
-      "description": "Tech-stack tag or skill chip. Uniform monochrome styling across every use, never colored per category.",
-      "html": "<span class=\"ds-tag-chip\">FastAPI</span>",
-      "css": ".ds-tag-chip { display: inline-block; border: 1px solid #dcd6c7; border-radius: 2px; padding: 2px 8px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: #5b6b7d; }"
+      "name": "Legend",
+      "kind": "card",
+      "refersTo": "legend-cell",
+      "description": "Ruled box of stat cells with a contact-link row.",
+      "html": "<section class=\"ds-legend\"><dl class=\"ds-legend-grid\"><div><dt>Label</dt><dd>00</dd></div><div><dt>Label</dt><dd>00</dd></div><div><dt>Label</dt><dd>00</dd></div><div><dt>Label</dt><dd>00</dd></div></dl><nav class=\"ds-legend-links\"><a href=\"#\">GitHub</a><a href=\"#\">LinkedIn</a><a href=\"#\">Email</a></nav></section>",
+      "css": ".ds-legend{border:1px solid rgba(18,32,46,.4);font-family:'Public Sans',sans-serif}.ds-legend-grid{margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line,#c9d1cb)}.ds-legend-grid div{display:flex;flex-direction:column;gap:4px;background:var(--paper,#f3f5f2);padding:12px 16px}.ds-legend-grid dt{font-size:12px;color:var(--ink-muted,#55626e)}.ds-legend-grid dd{margin:0;font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--ink,#12202e)}.ds-legend-links{display:flex;gap:24px;padding:0 16px;border-top:1px solid rgba(18,32,46,.4);font-size:14px}.ds-legend-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue,#2a6f9e);text-decoration:underline;text-underline-offset:2px}.ds-legend-links a:hover{color:var(--blue-deep,#1b4f75)}.ds-legend-links a:focus-visible{outline:2px solid var(--blue,#2a6f9e);outline-offset:2px;border-radius:2px}"
     },
     {
       "name": "Inline Link",
       "kind": "custom",
       "refersTo": "link-inline",
-      "description": "The only link style in the system: underlined, blue, no arrow suffix.",
-      "html": "<a class=\"ds-link\" href=\"#\">Repository</a>",
-      "css": ".ds-link { color: #2c5f8a; text-decoration: underline; text-underline-offset: 2px; } .ds-link:hover { color: #1d4568; } .ds-link:focus-visible { outline: 2px solid #2c5f8a; outline-offset: 2px; border-radius: 2px; }"
+      "description": "Blue underlined link with a 44px hit area.",
+      "html": "<a class=\"ds-link\" href=\"#\">View live</a>",
+      "css": ".ds-link{display:inline-flex;align-items:center;min-height:44px;color:var(--blue,#2a6f9e);text-decoration:underline;text-underline-offset:2px;font-family:'Public Sans',sans-serif}.ds-link:hover{color:var(--blue-deep,#1b4f75)}.ds-link:focus-visible{outline:2px solid var(--blue,#2a6f9e);outline-offset:2px;border-radius:2px}"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "status-badge-live",
+      "description": "Mono status label; green live, amber in progress, muted archived.",
+      "html": "<span class=\"ds-badge ds-live\">Live</span> <span class=\"ds-badge ds-prog\">In progress</span> <span class=\"ds-badge ds-arch\">Archived</span>",
+      "css": ".ds-badge{display:inline-flex;align-items:center;border:1px solid;border-radius:4px;padding:2px 8px;font-family:'JetBrains Mono',monospace;font-size:12px}.ds-live{color:var(--green-deep,#2f6446);border-color:rgba(63,125,88,.4)}.ds-prog{color:var(--amber-deep,#8a5a12);border-color:rgba(217,154,43,.4)}.ds-arch{color:var(--ink-muted,#55626e);border-color:var(--line,#c9d1cb)}"
+    },
+    {
+      "name": "Panel Heading",
+      "kind": "custom",
+      "refersTo": "headline",
+      "description": "Archivo section title with a trailing map-line rule.",
+      "html": "<div class=\"ds-head\"><h2>Achievements</h2><span></span></div>",
+      "css": ".ds-head{display:flex;align-items:center;gap:16px}.ds-head h2{margin:0;font-family:Archivo,sans-serif;font-weight:600;font-size:30px;color:var(--ink,#12202e)}.ds-head span{flex:1;height:1px;background:rgba(18,32,46,.3)}"
+    },
+    {
+      "name": "Spot Height",
+      "kind": "custom",
+      "refersTo": "spot-height",
+      "description": "Measured achievement result: benchmark triangle plus green mono value over title and context.",
+      "html": "<div class=\"ds-spot\"><p class=\"ds-spot-v\"><svg viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" aria-hidden=\"true\"><path d=\"M8 2 14.5 13.5h-13Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/><circle cx=\"8\" cy=\"10\" r=\"1.3\" fill=\"currentColor\"/></svg>00.0 metric</p><p class=\"ds-spot-t\">Achievement title</p><p class=\"ds-spot-c\">Context in muted small text.</p></div>",
+      "css": ".ds-spot{font-family:'Public Sans',sans-serif;padding:24px 0;border-bottom:1px solid var(--line,#c9d1cb)}.ds-spot-v{display:flex;align-items:center;gap:8px;margin:0;font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--green-deep,#2f6446)}.ds-spot-t{margin:4px 0 0;color:var(--ink,#12202e)}.ds-spot-c{margin:4px 0 0;font-size:14px;color:var(--ink-muted,#55626e)}"
+    },
+    {
+      "name": "Contour Plate",
+      "kind": "custom",
+      "refersTo": "contour-plate",
+      "description": "Authored placeholder for a project image: contour rings, scale bar, graticule ticks.",
+      "html": "<svg class=\"ds-plate\" viewBox=\"0 0 600 128\" preserveAspectRatio=\"xMidYMid slice\" aria-hidden=\"true\"><g stroke=\"currentColor\" fill=\"none\" stroke-width=\"1\"><ellipse cx=\"300\" cy=\"64\" rx=\"150\" ry=\"44\"/><ellipse cx=\"300\" cy=\"64\" rx=\"110\" ry=\"32\"/><ellipse cx=\"300\" cy=\"64\" rx=\"70\" ry=\"20\"/><ellipse cx=\"300\" cy=\"64\" rx=\"34\" ry=\"10\" style=\"color:#2a6f9e\"/></g><path d=\"M16 112h72M16 108v8M52 109v6M88 108v8\" stroke=\"#55626e\" stroke-width=\"1\" opacity=\".6\" fill=\"none\"/></svg>",
+      "css": ".ds-plate{display:block;width:100%;height:128px;border:1px solid var(--line,#c9d1cb);background:var(--paper-deep,#e9eeea);color:var(--contour,#b08d63)}"
     }
   ],
   "narrative": {
-    "northStar": "The Working Profile",
-    "overview": "An editorial-magazine profile crossed with a lab notebook. The page reads like a confident, left-aligned profile piece in a serious publication — but every claim is stated like a research log entry: problem, approach, measured result, plainly, because the underlying work has real numbers behind it. Decoration is refused wherever it would compete with those numbers for attention. The page is calm and static at rest; it earns exactly one moment of motion, on load, and nothing after that argues for the visitor's attention through animation.",
+    "northStar": "The Survey Sheet",
+    "overview": "The public page is one printed topographic sheet of Rochan's work. It does not arrange content like a developer portfolio (big name, hairline list, chip cloud); it uses the furniture of a map: a title block, a legend, a sheet index of neighbouring panels, benchmark triangles where something was measured, and contour linework standing in for imagery that does not exist yet. The sheet sits on a slightly deeper plate-grey page, inside a neatline double border with graticule ticks, and ends in a coordinate colophon.\n\nThe voice is cool, exact and quiet. Colour is map ink, not brand paint: blue-black for text, hydrography blue for anything you can follow, vegetation green for outcomes that were measured, road amber for work still in progress, contour brown for decorative linework only. Proof is set large, as spot heights, and everything else steps back. There are no shadows and no cards; separation is hairline rules, ruled boxes and whitespace.\n\nThe page earns exactly one authored moment: on load the title block settles in and the contour lines draw behind it. Nothing else animates, and all motion collapses under `prefers-reduced-motion`. The admin pages (`/admin`) reuse the same colour and type tokens but are not part of this composition: they have no sheet wrapper, neatline, ticks, legend or contours.",
     "keyCharacteristics": [
-      "Left-aligned, single-column editorial reading flow — never centered, never a marketing-landing-page composition.",
-      "Evidence carried in JetBrains Mono: dates, tech tags, and measured metrics read as 'measured fact,' distinct from prose.",
-      "Color is restrained by rule, not by accident: amber and green each do real work in exactly one place per view, never both at full strength together.",
-      "One entrance sequence (hero name + photo settling in, ~450ms) and nothing else animates on scroll."
+      "Cool pale sheet (not cream) on a one-step-deeper plate; ink-coloured hairlines at 40% for structure.",
+      "Archivo display, Public Sans text, JetBrains Mono for numbers, dates, status and coordinates.",
+      "Square, flat geometry: 1px rules, ruled grids built with 1px gaps over an ink ground, 4px on badges.",
+      "Measured results carry a benchmark triangle and green mono type; unmeasured results stay plain ink.",
+      "Authored contour placeholders replace missing project images; real images replace them without layout change."
     ],
     "rules": [
-      { "name": "The One-Accent-at-a-Time Rule", "body": "At any given scroll position, only one of amber or green does real visual work. They never appear at full strength together in the same frame, and neither ever becomes a section background.", "section": "colors" },
-      { "name": "The Measured-Text Rule", "body": "Amber or green text on the paper background always renders in its -deep variant. The bright base tones exist for borders, chips, and small accents only — never for body-sized text, where they fail contrast.", "section": "colors" },
-      { "name": "The Mono-Means-Measured Rule", "body": "JetBrains Mono appears only on dates, tech-stack tags, and measured metrics. It never sets body prose or headings, and it is never reached for as a generic 'technical' signal.", "section": "typography" }
+      {
+        "name": "The Meaning-Per-Ink Rule",
+        "body": "Blue means \"you can follow this\", green means \"this was measured\", amber means \"not finished\". A colour is never borrowed for decoration; brown is the only decorative ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The Text-Safe Variant Rule",
+        "body": "Amber and green text on the sheet always uses the `-deep` variant. The bright tones are for borders and small marks.",
+        "section": "colors"
+      },
+      {
+        "name": "The Spot-Height Rule",
+        "body": "Proof is large. A measured, short result is set as a mono spot height with a benchmark triangle before it; the rule steps the size down as the string gets longer rather than shrinking it to fit.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono-Means-Number Rule",
+        "body": "JetBrains Mono sets numbers, dates, status, and coordinates. It never sets headings or running prose.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Sheet Rule",
+        "body": "Nothing casts a shadow or floats. If something needs separation, it gets a hairline or a tonal step.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do keep JetBrains Mono reserved for dates, tech tags, and measured metrics only.",
-      "Do render amber or green body text in its -deep variant to hold WCAG AA contrast on the paper background.",
-      "Do omit a project's Result field entirely when no real measured outcome exists yet, rather than inventing or placeholder-filling it.",
-      "Do separate list entries (Experience, Projects, Achievements) with a single hairline --line divider, never a card or shadow.",
-      "Do keep the hero's one entrance animation disabled under prefers-reduced-motion."
+      "**Do** build ruled boxes from a 1px ink/40 border over 1px gaps on an ink/40 or Hairline ground, with Cool Sheet cells.",
+      "**Do** set short measured results as mono spot heights in Green Ink with a benchmark triangle, and drop the Result row entirely when no result exists.",
+      "**Do** use `-deep` variants for amber and green text, and keep Contour Brown to linework.",
+      "**Do** keep the authored contour moment to the hero on load, and honour `prefers-reduced-motion`.",
+      "**Do** keep touch targets at 44px minimum height and the 9rem ledger rail at 768px and up.",
+      "**Do** keep admin pages on the shared tokens but off the sheet furniture (no neatline, ticks, legend, contours)."
     ],
     "donts": [
-      "Don't use a warm cream background with a terracotta/clay accent — the generic AI-portfolio tell this system explicitly rejects.",
-      "Don't use amber and green at full strength in the same view.",
-      "Don't add a kicker/eyebrow label above any section heading.",
-      "Don't number projects (01/02/03) — status badges carry that signal instead.",
-      "Don't append an arrow to a link or button label.",
-      "Don't center the hero or use a gradient-blob background behind it.",
-      "Don't animate on scroll; the only animation is the hero's one-time entrance on load."
+      "**Don't** use shadows, cards, rounded cards, pills, or circular crops.",
+      "**Don't** use amber or Contour Brown for text, or green for anything that was not measured.",
+      "**Don't** use a cream ground; the sheet is cool grey-white.",
+      "**Don't** animate on scroll or add motion beyond the hero's settle and contour draw.",
+      "**Don't** number projects or use sequence markers; status badges carry that signal.",
+      "**Don't** append arrows to link labels or turn tech tags into a chip cloud.",
+      "**Don't** set prose or headings in JetBrains Mono."
     ]
   }
 }

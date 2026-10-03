@@ -1,163 +1,236 @@
 ---
 name: Rochan Awasthi Portfolio
-description: An editorial-profile portfolio that reads like a lab notebook — evidence first, restraint everywhere else.
+description: A topographic survey sheet of one person's work — title block, legend, sheet index, spot heights.
 colors:
-  ink: "#152a43"
-  paper: "#fbf9f4"
-  blue: "#2c5f8a"
-  blue-deep: "#1d4568"
-  amber: "#e8a93b"
-  amber-deep: "#906925"
-  green: "#3a8069"
-  green-deep: "#397d67"
-  line: "#dcd6c7"
-  ink-muted: "#5b6b7d"
+  ink: "#12202e"
+  paper: "#f3f5f2"
+  paper-deep: "#e9eeea"
+  blue: "#2a6f9e"
+  blue-deep: "#1b4f75"
+  amber: "#d99a2b"
+  amber-deep: "#8a5a12"
+  green: "#3f7d58"
+  green-deep: "#2f6446"
+  line: "#c9d1cb"
+  ink-muted: "#55626e"
+  contour: "#b08d63"
 typography:
   display:
-    fontFamily: "Fraunces, Georgia, serif"
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: "4.5rem"
+    fontWeight: 700
+    lineHeight: 1.02
+  headline:
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: "1.875rem"
     fontWeight: 600
-    lineHeight: 1.1
+    lineHeight: 1.2
+  title:
+    fontFamily: "Public Sans, system-ui, sans-serif"
+    fontSize: "1.125rem"
+    fontWeight: 500
+    lineHeight: 1.5
   body:
-    fontFamily: "Inter, system-ui, sans-serif"
+    fontFamily: "Public Sans, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.6
-  mono:
-    fontFamily: "JetBrains Mono, ui-monospace, monospace"
+  label:
+    fontFamily: "Public Sans, system-ui, sans-serif"
+    fontSize: "0.75rem"
     fontWeight: 400
-spacing:
-  section: "4rem"
-  section-sm: "6rem"
+    lineHeight: 1.33
+  spot-height:
+    fontFamily: "JetBrains Mono, ui-monospace, monospace"
+    fontSize: "1.25rem"
+    fontWeight: 400
+    lineHeight: 1.6
+  data:
+    fontFamily: "JetBrains Mono, ui-monospace, monospace"
+    fontSize: "0.75rem"
+    fontWeight: 400
+    lineHeight: 1.33
 rounded:
-  sm: "2px"
+  sm: "4px"
+  focus: "2px"
+spacing:
+  neatline-inset: "6px"
+  rail: "9rem"
+  gutter: "2rem"
+  section: "4rem"
+  section-lg: "6rem"
 components:
   status-badge-live:
-    backgroundColor: "transparent"
     textColor: "{colors.green-deep}"
+    typography: "{typography.data}"
     rounded: "{rounded.sm}"
-  status-badge-in_progress:
-    backgroundColor: "transparent"
+    padding: "2px 8px"
+  status-badge-in-progress:
     textColor: "{colors.amber-deep}"
+    typography: "{typography.data}"
     rounded: "{rounded.sm}"
+    padding: "2px 8px"
   status-badge-archived:
-    backgroundColor: "transparent"
     textColor: "{colors.ink-muted}"
+    typography: "{typography.data}"
     rounded: "{rounded.sm}"
+    padding: "2px 8px"
   link-inline:
     textColor: "{colors.blue}"
+    height: "44px"
   link-inline-hover:
     textColor: "{colors.blue-deep}"
+  sheet-index-cell:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.blue}"
+    height: "44px"
+    padding: "0 12px"
+  sheet-index-cell-hover:
+    backgroundColor: "{colors.paper-deep}"
+    textColor: "{colors.blue-deep}"
+  legend-cell:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    padding: "12px 16px"
+  contour-plate:
+    backgroundColor: "{colors.paper-deep}"
+    textColor: "{colors.contour}"
+    height: "128px"
 ---
 
 # Design System: Rochan Awasthi Portfolio
 
 ## Overview
 
-**Creative North Star: "The Working Profile"**
+**Creative North Star: "The Survey Sheet"**
 
-An editorial-magazine profile crossed with a lab notebook. The page reads like a confident, left-aligned profile piece in a serious publication — but every claim is stated like a research log entry: problem, approach, measured result, plainly, because the underlying work has real numbers behind it (benchmark scores, competition placements, live deployments). Decoration is refused wherever it would compete with those numbers for attention. The page is calm and static at rest; it earns exactly one moment of motion, on load, and nothing after that argues for the visitor's attention through animation.
+The public page is one printed topographic sheet of Rochan's work. It does not arrange content like a developer portfolio (big name, hairline list, chip cloud); it uses the furniture of a map: a title block, a legend, a sheet index of neighbouring panels, benchmark triangles where something was measured, and contour linework standing in for imagery that does not exist yet. The sheet sits on a slightly deeper plate-grey page, inside a neatline double border with graticule ticks, and ends in a coordinate colophon.
 
-Confirmed visual rejections (see Do's and Don'ts): no warm-cream-plus-terracotta template look, no near-black-plus-neon "AI startup" look, no SaaS card grid, no tracked-out uppercase eyebrows, no arrow-suffixed links, no centered gradient-blob hero, no sequence numbering on non-sequential content, no scroll-triggered repeat animation.
+The voice is cool, exact and quiet. Colour is map ink, not brand paint: blue-black for text, hydrography blue for anything you can follow, vegetation green for outcomes that were measured, road amber for work still in progress, contour brown for decorative linework only. Proof is set large, as spot heights, and everything else steps back. There are no shadows and no cards; separation is hairline rules, ruled boxes and whitespace.
+
+The page earns exactly one authored moment: on load the title block settles in and the contour lines draw behind it. Nothing else animates, and all motion collapses under `prefers-reduced-motion`. The admin pages (`/admin`) reuse the same colour and type tokens but are not part of this composition: they have no sheet wrapper, neatline, ticks, legend or contours.
 
 **Key Characteristics:**
-- Left-aligned, single-column editorial reading flow — never centered, never a marketing-landing-page composition.
-- Evidence carried in JetBrains Mono: dates, tech tags, and measured metrics read as "measured fact," distinct from prose.
-- Color is restrained by rule, not by accident: amber and green each do real work in exactly one place per view, never both at full strength together.
-- One entrance sequence (hero name + photo settling in, ~450ms) and nothing else animates on scroll.
+- Cool pale sheet (not cream) on a one-step-deeper plate; ink-coloured hairlines at 40% for structure.
+- Archivo display, Public Sans text, JetBrains Mono for numbers, dates, status and coordinates.
+- Square, flat geometry: 1px rules, ruled grids built with 1px gaps over an ink ground, 4px on badges.
+- Measured results carry a benchmark triangle and green mono type; unmeasured results stay plain ink.
+- Authored contour placeholders replace missing project images; real images replace them without layout change.
 
 ## Colors
 
-Warm, restrained, paper-and-ink palette with two earned accent colors reserved for specific meanings rather than decoration.
+A cool survey palette: one pale ground, one blue-black ink, and three earned map colours with fixed meanings.
 
 ### Primary
-- **Signal Blue** (`#2c5f8a`): the everyday workhorse — links, hover states, focus rings, section markers. Carries most of the page's color load. **Blue Deep** (`#1d4568`) is its hover/active state.
+- **Hydrography Blue** (#2a6f9e): links, sheet-index cells, the role line under the name, focus ring, text selection ground, and the innermost ring of each contour plate. **Deep Hydrography** (#1b4f75) is the hover state.
 
 ### Secondary
-- **Ledger Amber** (`#e8a93b`): sparing use only — a single highlighted stat, an "in progress" status badge, one CTA moment per view. Never a section wash or decorative fill. **Amber Deep** (`#906925`) is the same hue darkened for on-paper text use (badge labels): the base amber is only 1.96:1 against the paper background and fails WCAG AA for text, so text always renders in the deep variant while borders/accents may use the lighter base.
+- **Road Amber** (#d99a2b): borders only (the in-progress badge outline at 40%). It is never text. **Amber Ink** (#8a5a12) is the text-safe variant for the in-progress label and the content-load error line.
 
 ### Tertiary
-- **Result Green** (`#3a8069`): reserved for measured outcomes — result metrics, "live" status. Marks something that was actually measured, never a generic success color. **Green Deep** (`#397d67`) is a very slightly darkened variant used for on-paper text (the base green is 4.46:1, marginally under AA); the difference from the base is imperceptible but closes the gap to 4.5:1+.
+- **Vegetation Green** (#3f7d58): the border of the live badge (40%). **Green Ink** (#2f6446) is the text-safe variant, used for measured results (mono) and the live label.
 
 ### Neutral
-- **Ink** (`#152a43`): primary text and headings, 13.8:1 against paper.
-- **Paper** (`#fbf9f4`): page background — warm off-white, never stark white.
-- **Ink Muted** (`#5b6b7d`): secondary/supporting text (mentors, dates in prose, meta labels), 5.2:1 against paper — the palette's lowest-contrast text pairing, verified to still clear AA.
-- **Line** (`#dcd6c7`): hairline rule/divider — warm grey-beige, never pure grey.
+- **Survey Ink** (#12202e): text, headings, neatline, registration marks, and rules at reduced opacity (30-60%).
+- **Cool Sheet** (#f3f5f2): the sheet itself and cell grounds inside ruled grids.
+- **Plate Grey** (#e9eeea): the page ground behind the sheet, contour-plate ground, sheet-index hover ground.
+- **Hairline Grey** (#c9d1cb): row dividers, 1px grid gaps in the legend, plate borders.
+- **Muted Ink** (#55626e): secondary text, labels, dates, tech tags.
+- **Contour Brown** (#b08d63): decorative linework only (hero and plate contours). Never text, never a fill.
 
 ### Named Rules
-**The One-Accent-at-a-Time Rule.** At any given scroll position, only one of amber or green does real visual work. They never appear at full strength together in the same frame, and neither ever becomes a section background.
+**The Meaning-Per-Ink Rule.** Blue means "you can follow this", green means "this was measured", amber means "not finished". A colour is never borrowed for decoration; brown is the only decorative ink.
 
-**The Measured-Text Rule.** Amber or green text on the paper background always renders in its `-deep` variant. The bright base tones exist for borders, chips, and small accents only — never for body-sized text, where they fail contrast.
+**The Text-Safe Variant Rule.** Amber and green text on the sheet always uses the `-deep` variant. The bright tones are for borders and small marks.
 
 ## Typography
 
-**Display Font:** Fraunces (weight 500–600), with Georgia/serif fallback
-**Body Font:** Inter (weight 400), with system-ui fallback
-**Label/Mono Font:** JetBrains Mono (weight 400)
+**Display Font:** Archivo (500, 600, 700), with system sans fallback
+**Body Font:** Public Sans (400, 500), with system sans fallback
+**Label/Mono Font:** JetBrains Mono (400, 500), with ui-monospace fallback
 
-**Character:** A warm, literary serif for identity and section headings, paired with a plain, quiet sans for reading, and a monospace reserved strictly for things that were measured or dated — never used as a "technical" costume.
+**Character:** A grotesque with map-lettering authority for the title and panel headings, a plain humanist sans for reading, and a monospace kept for things that are numbers, dates, or coordinates.
 
 ### Hierarchy
-- **Display** (600, 36–72px responsive, Fraunces): the hero name only.
-- **Headline** (500, 26–36px responsive, Fraunces): section headings (Experience, Projects, Skills, Achievements).
-- **Title** (500, 18px, Inter): entry-level headings (a role title, a project title, an achievement title).
-- **Body** (400, 16–18px, Inter, line-height 1.6, max ~68ch): paragraph copy — bios, descriptions, problem/approach text.
-- **Label** (400, 12–14px, Inter or JetBrains Mono depending on context): meta text — dates, tech-stack tags, snapshot stat labels.
+- **Display** (700, 48px mobile / 72px from 640px, line-height 1.02, Archivo): the sheet title, i.e. the name, only.
+- **Headline** (600, 24px / 30px from 640px, Archivo): panel headings (Experience, Achievements, Projects, Skills), each trailed by a 1px ink/30 rule that runs to the right edge.
+- **Title** (500, 18px, Public Sans): entry titles (role, project). Skill group names use 14px at 500.
+- **Body** (400, 16px, 18px for the hero bio, line-height 1.6, Public Sans): prose capped at 68ch (60ch in the hero, 52ch for project titles).
+- **Label** (400, 12px, Public Sans, sentence case, no tracking): legend captions, "Sheet index", Problem / Approach / Result captions, mentors and notes (14px).
+- **Spot height** (400, 20px from 640px / 16px below, JetBrains Mono, Green Ink): achievement results that are measured and 28 characters or fewer. Step down to 16px mono at 29-40 characters and to 16px sans at longer lengths; unmeasured results are 18-20px sans in Survey Ink.
+- **Data** (400, 12px, JetBrains Mono): dates, status badges, colophon coordinates; legend values at 16-18px.
 
 ### Named Rules
-**The Mono-Means-Measured Rule.** JetBrains Mono appears only on dates, tech-stack tags, and measured metrics. A result counts as measured only if it states a number; prose outcomes render in ink, not green mono. It never sets body prose or headings, and it is never reached for as a generic "technical" signal.
+**The Spot-Height Rule.** Proof is large. A measured, short result is set as a mono spot height with a benchmark triangle before it; the rule steps the size down as the string gets longer rather than shrinking it to fit.
+
+**The Mono-Means-Number Rule.** JetBrains Mono sets numbers, dates, status, and coordinates. It never sets headings or running prose.
 
 ## Layout
 
-Left-aligned reading flow, capped at a ~896px (`max-w-4xl`) column centered in the viewport on wide screens. From 768px (`md`), Experience, Projects and Achievements entries use a **ledger rail**: a fixed 9rem left column carries each entry's date, status or location in small type (the lab-notebook margin), and the body sits in the right column; below 768px the same meta stacks above the entry. The hero, snapshot strip, Skills and footer stay full-width single-column. Body text keeps its ~68ch measure regardless. The column itself stays left-aligned internally — the column itself stays left-aligned internally; centering the column is a readability choice, not a return to a marketing-page composition. Vertical rhythm is generous and consistent: sections are separated by `mt-16` (mobile) / `mt-24` (desktop, ≥640px), entries within a section are separated by `border-line` hairline dividers rather than cards or shadows. The hero breaks to a `flex-row` (text + photo side by side) only at ≥640px; below that it stacks. Skills groups move from one column to a two-column grid at ≥640px.
+The sheet is centered, capped at 64rem (`max-w-5xl`), inset 0.75rem from the viewport on phones and 2rem from 640px, with 1.25rem (phone) to 2.5rem (640px+) interior padding. Content flows in one column on the sheet.
+
+The first viewport is a two-column hero from 768px: title block on the left (flexible), a fixed 15rem right column holding the photo (16rem tall, full column width) over the 2x2 sheet index. Below 768px the columns stack, and the photo becomes a 11rem by 13rem plate beside the index at 640px+. The Legend follows immediately: a ruled box of four stat cells (two across on phones) and one row of contact links beneath.
+
+Experience, Achievements, Projects and Skills share a **ledger rail**: from 768px a fixed 9rem left column carries dates, status, or group names and the body sits to its right with a 2rem gap; below 768px the meta stacks above the body. Entries are separated by `divide-y` hairlines (Hairline Grey), never boxes. Sections are 4rem apart on phones and 6rem from 640px; section anchors use an 2rem scroll margin. Touch targets are at least 44px tall (inline links, sheet-index cells).
 
 ## Elevation & Depth
 
-No shadows anywhere in the system. Depth and separation are conveyed entirely through hairline dividers (`--line`) and whitespace — a flat, paper-like surface throughout, consistent with the "lab notebook" material the system is named for.
+There are no shadows and no cards. Depth is conveyed by tonal stepping and rules: the Plate Grey page ground sits one step below the Cool Sheet; contour plates sit one step below the sheet in the same Plate Grey; ruled boxes (legend, sheet index) are 1px ink/40 borders over 1px Hairline or ink gaps. The neatline is a 1px ink border plus a second 1px ink outline inset 6px, with graticule ticks every 4rem (1px at 55% opacity) along the top and left, drawn between the two lines.
+
+### Named Rules
+**The Flat Sheet Rule.** Nothing casts a shadow or floats. If something needs separation, it gets a hairline or a tonal step.
 
 ## Shapes
 
-Minimal, restrained corner language: a 2px radius (`rounded-sm`) on the few bordered elements (status badges, tech-stack chips, skill chips) — just enough to soften a hard edge, never a rounded-card aesthetic. No circular crops, no pill-shaped badges, no clipped/masked photo shapes; a future hero photo is specified as a rectangular, slightly asymmetric crop, never circular or gradient-masked.
+Square by default. Photos, plates, legend and sheet-index boxes are rectangular with 1px borders. The only rounding is the status badge (4px) and the keyboard focus ring (2px). No circles, pills, or masked photo shapes. The hero photo carries four corner registration marks (12px L-shaped ink/60 ticks sitting 8px outside each corner) and a 1px ink/40 border. The benchmark mark is a 14px triangle outline with a centre dot, in the colour of the text beside it.
 
 ## Components
 
-### Status Badge
-- **Shape:** bordered rectangle, 2px radius, 1px border.
-- **Live:** green-deep text, green border at 40% opacity.
-- **In progress:** amber-deep text, amber border at 40% opacity.
-- **Archived:** ink-muted text, plain line-colored border.
-- Replaces decorative sequence numbering — projects are not a sequence, so no 01/02/03 markers appear anywhere.
+### Sheet Title Block (Hero)
+Name in Display, role line in Hydrography Blue at 16px/500, bio in 18px ink. Contours draw behind it (see Contours). The title block and the right column settle in over 450ms with an upward 14px drift; secondary elements are delayed 90ms.
 
-### Tag Chip (tech stack, skills)
-- **Style:** 2px-radius border in `--line`, ink-muted text, JetBrains Mono, extra-small size. Uniform across all chips — never colored per-category, never a rainbow "pill cloud."
+### Contours
+A deterministic generator (seeded SVG rings) produces linework. The hero version is a 9-ring group in Contour Brown at 30% opacity (40% from 768px), anchored to the top right and masked to fade out downward; each ring draws in via stroke-dash over 1100ms, staggered 70ms. The project **Contour Plate** is a 128px-tall, full-width, hairline-bordered Plate Grey panel with 5-9 rings seeded from the project slug (innermost ring in Hydrography Blue), a scale bar bottom left, and graticule ticks along the top. It is decorative and is replaced by the uploaded image (192px tall, 256px from 640px, hairline border) when one exists.
 
-### Project / Experience / Achievement Entries
-- **Style:** full-width stacked blocks separated by a single `--line` hairline rule (`divide-y`), never a card, never a shadow.
-- **Projects specifically:** internally structured as Problem → Approach → Result, with Result set in JetBrains Mono and colored `--green-deep` only when a real measured outcome exists — the field is omitted entirely, never filled with a placeholder, when no result exists yet.
+### Legend
+A ruled box (1px ink/40) holding stat cells in a 2-column (4 from 640px) grid with 1px Hairline gaps: a 12px muted caption above a mono value (16-18px). A second row separated by an ink/40 rule carries contact links inline with 1.5rem gaps.
+
+### Sheet Index (SectionNav)
+A "Sheet index" caption over a 2-column grid of cells divided by 1px ink/40 gaps and a 1px ink/40 outer border. Each cell is 44px tall, 12px side padding, 14px Hydrography Blue; hover shifts to Plate Grey, Deep Hydrography and underlines. Only sections that have content appear.
 
 ### Links
-- **Style:** `--blue` text, underline with `underline-offset-2`, `--blue-deep` on hover. No arrow suffix, ever ("View live" / "Repository", not "View live →").
+Hydrography Blue, underlined with 2px offset, Deep Hydrography on hover, 44px hit area. Labels are plain words ("View live", "Repository"); no arrow suffix.
 
-### Snapshot Strip
-- **Style:** a slim `<dl>` band with vertical dividers (`divide-x`) between stats, bordered top and bottom by `--line`. Stat values in JetBrains Mono, labels in small ink-muted Inter. Quiet by design — not an oversized stat-card-with-icon treatment.
+### Status Badge
+Mono 12px, 1px border, 4px radius, 8px by 2px padding, transparent ground. Live: Green Ink text, green/40 border. In progress: Amber Ink text, amber/40 border. Archived: Muted Ink text, Hairline border.
 
-### Footer
-- **Style:** plain text links in Inter, `--blue` / `--blue-deep` hover, separated by generous horizontal gaps. No icon-only circular buttons.
+### Project Entry
+Ledger rail with date (mono) and badge on the left; right side stacks plate or image, 18px/500 title, then Problem / Approach / Result as a definition list with 12px muted captions and 68ch text. A measured result gets a benchmark triangle and Green Ink (mono when 40 characters or fewer); an unmeasured one is plain ink; no Result row at all when none exists. Tech stack is a comma-separated muted 14px text run, not chips. Links sit last.
+
+### Experience, Achievements, Skills Entries
+Ledger-rail rows on hairline dividers. Experience: mono date and location in the rail, 18px/500 role, organization at 16px ink. Achievements: the result is the headline of the row (Spot-Height Rule), title beneath, context in muted 14px. Skills: group name in the rail, skills as a comma-separated 14px run with any custom field shown as a muted 12px sub-line.
+
+### Colophon (Footer)
+Top rule in ink/40, contact links repeated, then a 12px mono line: place, coordinates, edition year.
+
+### Focus and Selection
+Every interactive element gets a 2px Hydrography Blue outline at 2px offset with a 2px radius. Text selection inverts to blue ground on sheet paper.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep JetBrains Mono reserved for dates, tech tags, and measured metrics only.
-- **Do** render amber or green body text in its `-deep` variant to hold WCAG AA contrast on the paper background.
-- **Do** omit a project's Result field entirely when no real measured outcome exists yet, rather than inventing or placeholder-filling it.
-- **Do** separate list entries (Experience, Projects, Achievements) with a single hairline `--line` divider, never a card or shadow.
-- **Do** keep the hero's one entrance animation disabled under `prefers-reduced-motion`.
+- **Do** build ruled boxes from a 1px ink/40 border over 1px gaps on an ink/40 or Hairline ground, with Cool Sheet cells.
+- **Do** set short measured results as mono spot heights in Green Ink with a benchmark triangle, and drop the Result row entirely when no result exists.
+- **Do** use `-deep` variants for amber and green text, and keep Contour Brown to linework.
+- **Do** keep the authored contour moment to the hero on load, and honour `prefers-reduced-motion`.
+- **Do** keep touch targets at 44px minimum height and the 9rem ledger rail at 768px and up.
+- **Do** keep admin pages on the shared tokens but off the sheet furniture (no neatline, ticks, legend, contours).
 
 ### Don't:
-- **Don't** use a warm cream background with a terracotta/clay accent — the generic AI-portfolio tell this system explicitly rejects.
-- **Don't** use amber and green at full strength in the same view.
-- **Don't** add a kicker/eyebrow label above any section heading.
-- **Don't** number projects (01/02/03) — status badges carry that signal instead.
-- **Don't** append an arrow to a link or button label.
-- **Don't** center the hero or use a gradient-blob background behind it.
-- **Don't** animate on scroll; the only animation is the hero's one-time entrance on load.
+- **Don't** use shadows, cards, rounded cards, pills, or circular crops.
+- **Don't** use amber or Contour Brown for text, or green for anything that was not measured.
+- **Don't** use a cream ground; the sheet is cool grey-white.
+- **Don't** animate on scroll or add motion beyond the hero's settle and contour draw.
+- **Don't** number projects or use sequence markers; status badges carry that signal.
+- **Don't** append arrows to link labels or turn tech tags into a chip cloud.
+- **Don't** set prose or headings in JetBrains Mono.

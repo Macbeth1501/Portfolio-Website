@@ -1,4 +1,5 @@
 import type { SkillGroup } from "@/lib/types";
+import { SectionHeading } from "./SectionHeading";
 import { formatCustomFieldValue } from "@/lib/customFields";
 
 export function SkillsSection({ skillGroups }: { skillGroups: SkillGroup[] }) {
@@ -6,24 +7,19 @@ export function SkillsSection({ skillGroups }: { skillGroups: SkillGroup[] }) {
 
   return (
     <section id="skills" aria-labelledby="skills-heading" className="mt-16 scroll-mt-8 sm:mt-24">
-      <h2
-        id="skills-heading"
-        className="font-[family-name:var(--font-display)] text-2xl font-medium text-ink sm:text-3xl"
-      >
-        Skills
-      </h2>
+      <SectionHeading id="skills-heading">Skills</SectionHeading>
 
-      <div className="mt-6 grid gap-6 sm:grid-cols-2">
+      <div className="mt-6 divide-y divide-line">
         {skillGroups.map((group) => (
-          <div key={group.group}>
+          <div key={group.group} className="py-4 md:grid md:grid-cols-[9rem_1fr] md:gap-x-8">
             <h3 className="text-sm font-medium text-ink">{group.group}</h3>
-            <ul className="mt-2 flex flex-wrap gap-2">
+            <ul className="mt-2 flex flex-wrap gap-x-2 gap-y-1 md:mt-0">
               {group.skills.map((skill) => {
                 const extras = (skill.customFields ?? []).filter((field) => field.value.length > 0);
                 return (
                   <li
                     key={skill.name}
-                    className="rounded-sm border border-line px-2 py-0.5 font-mono text-xs text-ink-muted"
+                    className="text-sm text-ink after:text-ink-muted after:content-[','] last:after:content-none"
                   >
                     {skill.name}
                     {extras.map((field) => (

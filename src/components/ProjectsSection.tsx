@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Project } from "@/lib/types";
 import { ProjectCard } from "./ProjectCard";
+import { SectionHeading } from "./SectionHeading";
 
 const INITIAL_COUNT = 6;
 
@@ -16,14 +17,9 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
 
   return (
     <section id="projects" aria-labelledby="projects-heading" className="mt-16 scroll-mt-8 sm:mt-24">
-      <h2
-        id="projects-heading"
-        className="font-[family-name:var(--font-display)] text-2xl font-medium text-ink sm:text-3xl"
-      >
-        Projects
-      </h2>
+      <SectionHeading id="projects-heading">Projects</SectionHeading>
 
-      <div id="project-list" className="mt-6 divide-y divide-line border-t border-line">
+      <div id="project-list" className="mt-6 divide-y divide-line">
         {visible.map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}
