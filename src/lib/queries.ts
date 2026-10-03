@@ -1,5 +1,5 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import type { Achievement, Experience, FooterLink, Hero, Project, SkillGroup, SnapshotStat } from "@/lib/types";
+import type { Achievement, Experience, FooterLink, Hero, Project, Skill, SkillGroup, SnapshotStat } from "@/lib/types";
 
 export type SiteContent = {
   hero: Hero;
@@ -103,11 +103,12 @@ export async function getSiteContent(): Promise<{ content: SiteContent; error: s
 
   const skillGroups: SkillGroup[] = [];
   for (const row of skillRows.data ?? []) {
+    const skill: Skill = { name: row.name, customFields: row.custom_fields ?? [] };
     const existing = skillGroups.find((g) => g.group === row.group);
     if (existing) {
-      existing.skills.push(row.name);
+      existing.skills.push(skill);
     } else {
-      skillGroups.push({ group: row.group, skills: [row.name] });
+      skillGroups.push({ group: row.group, skills: [skill] });
     }
   }
 

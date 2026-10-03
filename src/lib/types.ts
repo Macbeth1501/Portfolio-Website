@@ -31,9 +31,14 @@ export type Experience = {
   customFields?: CustomFieldValue[];
 };
 
+export type Skill = {
+  name: string;
+  customFields?: CustomFieldValue[];
+};
+
 export type SkillGroup = {
   group: string;
-  skills: string[];
+  skills: Skill[];
 };
 
 export type Achievement = {

@@ -231,7 +231,7 @@ export const projects: Project[] = [
   },
 ];
 
-export const skillGroups: SkillGroup[] = [
+const skillGroupsByName: { group: string; skills: string[] }[] = [
   {
     group: "Languages",
     skills: ["Python", "C++", "C", "Java", "SQL", "JavaScript/TypeScript", "Solidity"],
@@ -280,6 +280,11 @@ export const skillGroups: SkillGroup[] = [
     skills: ["Solidity", "Foundry", "Slither", "Polygon Amoy testnet"],
   },
 ];
+
+export const skillGroups: SkillGroup[] = skillGroupsByName.map(({ group, skills }) => ({
+  group,
+  skills: skills.map((name) => ({ name })),
+}));
 
 export const achievements: Achievement[] = [
   {

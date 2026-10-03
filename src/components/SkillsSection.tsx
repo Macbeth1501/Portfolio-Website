@@ -1,4 +1,5 @@
 import type { SkillGroup } from "@/lib/types";
+import { formatCustomFieldValue } from "@/lib/customFields";
 
 export function SkillsSection({ skillGroups }: { skillGroups: SkillGroup[] }) {
   if (skillGroups.length === 0) return null;
@@ -17,14 +18,22 @@ export function SkillsSection({ skillGroups }: { skillGroups: SkillGroup[] }) {
           <div key={group.group}>
             <h3 className="text-sm font-medium text-ink">{group.group}</h3>
             <ul className="mt-2 flex flex-wrap gap-2">
-              {group.skills.map((skill) => (
-                <li
-                  key={skill}
-                  className="rounded-sm border border-line px-2 py-0.5 font-mono text-xs text-ink-muted"
-                >
-                  {skill}
-                </li>
-              ))}
+              {group.skills.map((skill) => {
+                const extras = (skill.customFields ?? []).filter((field) => field.value.length > 0);
+                return (
+                  <li
+                    key={skill.name}
+                    className="rounded-sm border border-line px-2 py-0.5 font-mono text-xs text-ink-muted"
+                  >
+                    {skill.name}
+                    {extras.map((field) => (
+                      <span key={field.key} className="block text-[11px] text-ink-muted/80">
+                        {field.label}: {formatCustomFieldValue(field)}
+                      </span>
+                    ))}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}
