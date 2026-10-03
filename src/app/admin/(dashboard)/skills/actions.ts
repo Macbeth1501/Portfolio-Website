@@ -95,3 +95,38 @@ export async function deleteSkill(formData: FormData) {
   revalidatePath("/admin/skills");
   revalidatePath("/");
 }
+
+export async function moveSkill(id: string, direction: "up" | "down") {
+  const supabase = await requireOwner();
+
+  const { data: current, error: currentError } = await supabase
+    .from("skills")
+    .select("id, group, sort_order")
+    .eq("id", id)
+    .single();
+  if (currentError || !current) return;
+
+  const { data: rows, error } = await supabase
+    .from("skills")
+    .select("id, sort_order")
+    .eq("group", current.group)
+    .order("sort_order")
+    .order("created_at");
+  if (error) throw new Error(error.message);
+
+  const index = (rows ?? []).findIndex((row) => row.id === id);
+  if (index === -1) return;
+
+  const swapIndex = direction === "up" ? index - 1 : index + 1;
+  if (swapIndex < 0 || swapIndex >= (rows ?? []).length) return;
+
+  const swap = rows![swapIndex];
+
+  await Promise.all([
+    supabase.from("skills").update({ sort_order: swap.sort_order }).eq("id", current.id),
+    supabase.from("skills").update({ sort_order: current.sort_order }).eq("id", swap.id),
+  ]);
+
+  revalidatePath("/admin/skills");
+  revalidatePath("/");
+}

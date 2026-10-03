@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
+import { ReorderButtons } from "@/components/admin/ReorderButtons";
 import { DeleteButton } from "@/components/admin/DeleteButton";
-import { deleteSkill } from "./actions";
+import { deleteSkill, moveSkill } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -41,8 +42,15 @@ export default async function AdminSkillsPage() {
           <ul className="mt-2 divide-y divide-line border-t border-line">
             {skills
               .filter((skill) => skill.group === group)
-              .map((skill) => (
+              .map((skill, index, groupSkills) => (
                 <li key={skill.id} className="flex items-center gap-4 py-3">
+                  <ReorderButtons
+                    upAction={moveSkill.bind(null, skill.id, "up")}
+                    downAction={moveSkill.bind(null, skill.id, "down")}
+                    isFirst={index === 0}
+                    isLast={index === groupSkills.length - 1}
+                  />
+
                   <div className="min-w-0 flex-1">
                     <p className="text-ink">{skill.name}</p>
                   </div>
