@@ -1,4 +1,5 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { normalizeUrl, readLinks } from "@/lib/url";
 import type { Achievement, Experience, FooterLink, Hero, Project, Skill, SkillGroup, SnapshotStat } from "@/lib/types";
 
 export type SiteContent = {
@@ -73,7 +74,7 @@ export async function getSiteContent(): Promise<{ content: SiteContent; error: s
   };
 
   const snapshotStats: SnapshotStat[] = siteSettings.data.snapshot_stats ?? [];
-  const footerLinks: FooterLink[] = siteSettings.data.contact_links ?? [];
+  const footerLinks: FooterLink[] = readLinks(siteSettings.data.contact_links);
 
   const experience: Experience[] = (experienceRows.data ?? []).map((row) => ({
     roleTitle: row.role_title,
@@ -95,8 +96,8 @@ export async function getSiteContent(): Promise<{ content: SiteContent; error: s
     result: row.result ?? undefined,
     techStack: row.tech_stack ?? [],
     imageUrl: mediaUrl(row.image_path),
-    liveUrl: row.live_url ?? undefined,
-    repoUrl: row.repo_url ?? undefined,
+    liveUrl: row.live_url ? normalizeUrl(row.live_url) : undefined,
+    repoUrl: row.repo_url ? normalizeUrl(row.repo_url) : undefined,
     teamNote: row.team_note ?? undefined,
     customFields: row.custom_fields ?? [],
   }));
@@ -117,6 +118,7 @@ export async function getSiteContent(): Promise<{ content: SiteContent; error: s
     result: row.result ?? "",
     context: row.context ?? "",
     date: row.date ?? "",
+    imageUrl: mediaUrl(row.image_path),
     customFields: row.custom_fields ?? [],
   }));
 

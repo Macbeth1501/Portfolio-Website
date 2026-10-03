@@ -1,3 +1,4 @@
+import { readLinks } from "@/lib/url";
 import { redirect } from "next/navigation";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
 import { SettingsForm } from "./SettingsForm";
@@ -29,7 +30,7 @@ export default async function AdminSettingsPage() {
           photoUrl,
           photoPath: row.photo_path,
           snapshotStats: row.snapshot_stats ?? [],
-          contactLinks: row.contact_links ?? [],
+          contactLinks: readLinks(row.contact_links),
         }}
       />
     </div>

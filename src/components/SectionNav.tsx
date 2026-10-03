@@ -10,10 +10,10 @@ export function SectionNav({ sections }: { sections: SectionLink[] }) {
       <p className="text-xs text-ink-muted">Sheet index</p>
       <ul className="mt-1 grid grid-cols-2 gap-px border border-ink/40 bg-ink/40">
         {sections.map((section) => (
-          <li key={section.id} className="bg-paper">
+          <li key={section.id} className="bg-paper last:odd:col-span-2">
             <a
               href={`#${section.id}`}
-              className="flex min-h-11 items-center px-3 text-sm text-blue underline-offset-2 hover:bg-paper-deep hover:text-blue-deep hover:underline"
+              className="flex min-h-11 items-center px-3 text-sm font-medium text-ink transition-colors duration-150 ease-out hover:bg-ink hover:text-paper motion-reduce:transition-none"
             >
               {section.label}
             </a>

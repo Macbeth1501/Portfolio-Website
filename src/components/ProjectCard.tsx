@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { FitImage } from "./FitImage";
 import type { Project } from "@/lib/types";
 import { isMeasured } from "@/lib/measured";
 import { StatusBadge } from "./StatusBadge";
@@ -20,9 +20,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="mt-3 md:mt-0">
         <div className="mb-4">
           {project.imageUrl ? (
-            <div className="relative h-48 w-full overflow-hidden border border-line sm:h-64">
-              <Image src={project.imageUrl} alt={`Screenshot of ${project.title}`} fill className="object-cover" />
-            </div>
+            <FitImage src={project.imageUrl} alt={`Screenshot of ${project.title}`} />
           ) : (
             <ContourPlate seed={project.slug} />
           )}

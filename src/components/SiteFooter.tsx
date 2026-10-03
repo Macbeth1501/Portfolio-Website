@@ -1,5 +1,6 @@
 import type { FooterLink } from "@/lib/types";
 import { linkClass } from "./linkClass";
+import { isExternal } from "@/lib/url";
 
 export function SiteFooter({ links }: { links: FooterLink[] }) {
   return (
@@ -7,7 +8,12 @@ export function SiteFooter({ links }: { links: FooterLink[] }) {
       {links.length > 0 ? (
         <nav aria-label="Contact links" className="flex flex-wrap gap-x-6 text-sm">
           {links.map((link) => (
-            <a key={link.label} href={link.url} className={linkClass}>
+            <a
+              key={link.label}
+              href={link.url}
+              className={linkClass}
+              {...(isExternal(link.url) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
               {link.label}
             </a>
           ))}

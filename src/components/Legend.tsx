@@ -1,5 +1,5 @@
 import type { FooterLink, SnapshotStat } from "@/lib/types";
-import { linkClass } from "./linkClass";
+import { ButtonLink } from "./ButtonLink";
 
 /** The map legend: snapshot stats and contact links in one ruled box. */
 export function Legend({ stats, links }: { stats: SnapshotStat[]; links: FooterLink[] }) {
@@ -20,12 +20,12 @@ export function Legend({ stats, links }: { stats: SnapshotStat[]; links: FooterL
       {links.length > 0 ? (
         <nav
           aria-label="Contact"
-          className={`flex flex-wrap gap-x-6 px-4 text-sm ${stats.length > 0 ? "border-t border-ink/40" : ""}`}
+          className={`flex flex-wrap gap-3 p-4 ${stats.length > 0 ? "border-t border-ink/40" : ""}`}
         >
           {links.map((link) => (
-            <a key={link.label} href={link.url} className={linkClass}>
+            <ButtonLink key={link.label} href={link.url}>
               {link.label}
-            </a>
+            </ButtonLink>
           ))}
         </nav>
       ) : null}

@@ -5,6 +5,7 @@ import { ExperienceSection } from "@/components/ExperienceSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { SkillsSection } from "@/components/SkillsSection";
 import { AchievementsSection } from "@/components/AchievementsSection";
+import { ContactSection } from "@/components/ContactSection";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getSiteContent } from "@/lib/queries";
 
@@ -19,10 +20,15 @@ export default async function Home() {
     { id: "achievements", label: "Achievements", present: content.achievements.length > 0 },
     { id: "projects", label: "Projects", present: content.projects.length > 0 },
     { id: "skills", label: "Skills", present: content.skillGroups.length > 0 },
+    {
+      id: "contact",
+      label: "Contact",
+      present: content.footerLinks.some((link) => link.url.toLowerCase().startsWith("mailto:")),
+    },
   ];
 
   return (
-    <div className="sheet mx-auto my-3 w-[calc(100%-1.5rem)] max-w-5xl sm:my-8 sm:w-[calc(100%-4rem)]">
+    <div className="sheet mx-auto my-3 w-[calc(100%-1.5rem)] max-w-5xl xl:max-w-6xl sm:my-8 sm:w-[calc(100%-4rem)]">
     <main id="main" className="px-5 pb-16 sm:px-10">
       {error ? (
         <p className="mt-8 max-w-xl text-amber-deep">
@@ -36,6 +42,7 @@ export default async function Home() {
       <AchievementsSection achievements={content.achievements} />
       <ProjectsSection projects={content.projects} />
       <SkillsSection skillGroups={content.skillGroups} />
+      <ContactSection links={content.footerLinks} />
       <SiteFooter links={content.footerLinks} />
     </main>
     </div>

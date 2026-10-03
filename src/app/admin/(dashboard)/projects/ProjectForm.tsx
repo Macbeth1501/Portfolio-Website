@@ -94,7 +94,7 @@ export function ProjectForm({
         {isEdit && project?.imageUrl ? (
           <div className="mb-2 flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={project.imageUrl} alt="" className="h-20 w-32 object-cover" />
+            <img src={project.imageUrl} alt="" className="h-20 w-32 border border-line bg-paper-deep object-contain" />
             <label className="flex items-center gap-2 text-sm text-ink-muted">
               <input
                 type="checkbox"

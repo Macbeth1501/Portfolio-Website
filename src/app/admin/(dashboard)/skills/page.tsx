@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
-import { ReorderButtons } from "@/components/admin/ReorderButtons";
+import { ReorderList } from "@/components/admin/ReorderList";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import { deleteSkill, moveSkill } from "./actions";
 
@@ -39,36 +39,34 @@ export default async function AdminSkillsPage() {
       {groups.map((group) => (
         <div key={group} className="mt-8">
           <h2 className="text-sm font-medium text-ink">{group}</h2>
-          <ul className="mt-2 divide-y divide-line border-t border-line">
-            {skills
+          <ReorderList
+            items={skills
               .filter((skill) => skill.group === group)
-              .map((skill, index, groupSkills) => (
-                <li key={skill.id} className="flex items-center gap-4 py-3">
-                  <ReorderButtons
-                    upAction={moveSkill.bind(null, skill.id, "up")}
-                    downAction={moveSkill.bind(null, skill.id, "down")}
-                    isFirst={index === 0}
-                    isLast={index === groupSkills.length - 1}
-                  />
+              .map((skill) => ({
+                id: skill.id,
+                content: (
+                  <>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-ink">{skill.name}</p>
+                    </div>
 
-                  <div className="min-w-0 flex-1">
-                    <p className="text-ink">{skill.name}</p>
-                  </div>
+                    <Link
+                      href={`/admin/skills/${skill.id}/edit`}
+                      className="font-mono text-xs text-blue underline underline-offset-2 hover:text-blue-deep"
+                    >
+                      Edit
+                    </Link>
 
-                  <Link
-                    href={`/admin/skills/${skill.id}/edit`}
-                    className="font-mono text-xs text-blue underline underline-offset-2 hover:text-blue-deep"
-                  >
-                    Edit
-                  </Link>
-
-                  <form action={deleteSkill}>
-                    <input type="hidden" name="id" value={skill.id} />
-                    <DeleteButton confirmLabel={skill.name} />
-                  </form>
-                </li>
-              ))}
-          </ul>
+                    <form action={deleteSkill}>
+                      <input type="hidden" name="id" value={skill.id} />
+                      <DeleteButton confirmLabel={skill.name} />
+                    </form>
+                  </>
+                ),
+              }))}
+            moveAction={moveSkill}
+            emptyMessage="No skills in this group."
+          />
         </div>
       ))}
 

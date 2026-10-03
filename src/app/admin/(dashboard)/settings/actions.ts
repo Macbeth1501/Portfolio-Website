@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
+import { normalizeUrl } from "@/lib/url";
 
 export type FormState = { error: string } | { success: true; savedAt: number } | null;
 
@@ -82,7 +83,10 @@ export async function updateSiteSettings(_prevState: FormState, formData: FormDa
   }
 
   const snapshotStats = zipPairs(formData, "stat_label", "stat_value");
-  const contactLinks = zipPairs(formData, "link_label", "link_url");
+  const contactLinks = zipPairs(formData, "link_label", "link_url").map(({ label, value }) => ({
+    label,
+    url: normalizeUrl(value),
+  }));
 
   const { error } = await supabase
     .from("site_settings")

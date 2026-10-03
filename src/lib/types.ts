@@ -46,6 +46,7 @@ export type Achievement = {
   result: string;
   context: string;
   date: string;
+  imageUrl?: string;
   customFields?: CustomFieldValue[];
 };
 

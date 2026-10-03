@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
 import { SignOutButton } from "@/components/admin/SignOutButton";
@@ -28,6 +29,25 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
         </div>
         <SignOutButton />
       </div>
+
+      <nav aria-label="Admin sections" className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+        {[
+          ["/admin", "Dashboard"],
+          ["/admin/projects", "Projects"],
+          ["/admin/experience", "Experience"],
+          ["/admin/skills", "Skills"],
+          ["/admin/achievements", "Achievements"],
+          ["/admin/fields", "Fields"],
+          ["/admin/settings", "Site settings"],
+        ].map(([href, label]) => (
+          <Link key={href} href={href} className="py-2 text-blue underline underline-offset-2 hover:text-blue-deep">
+            {label}
+          </Link>
+        ))}
+        <Link href="/" className="py-2 text-ink-muted underline underline-offset-2 hover:text-ink">
+          View site
+        </Link>
+      </nav>
 
       <div className="mt-8">{children}</div>
     </div>

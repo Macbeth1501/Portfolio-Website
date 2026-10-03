@@ -29,6 +29,19 @@ function str(formData: FormData, key: string): string | null {
   return trimmed.length > 0 ? trimmed : null;
 }
 
+async function uploadAchievementImage(
+  supabase: Awaited<ReturnType<typeof createAuthServerClient>>,
+  file: File,
+): Promise<string> {
+  const ext = file.name.includes(".") ? file.name.split(".").pop() : "jpg";
+  const path = `achievements/${crypto.randomUUID()}.${ext}`;
+  const { error } = await supabase!.storage.from("media").upload(path, file, {
+    contentType: file.type || undefined,
+  });
+  if (error) throw new Error(`Image upload failed: ${error.message}`);
+  return path;
+}
+
 async function getFieldDefinitions(supabase: Awaited<ReturnType<typeof createAuthServerClient>>) {
   const { data } = await supabase!
     .from("field_definitions")
@@ -48,9 +61,20 @@ export async function createAchievement(_prevState: FormState, formData: FormDat
   const title = str(formData, "title");
   if (!title) return { error: "Title is required." };
 
+  let imagePath: string | null = null;
+  const imageFile = formData.get("image");
+  if (imageFile instanceof File && imageFile.size > 0) {
+    try {
+      imagePath = await uploadAchievementImage(supabase, imageFile);
+    } catch (err) {
+      return { error: (err as Error).message };
+    }
+  }
+
   const fieldDefinitions = await getFieldDefinitions(supabase);
 
   const { error } = await supabase.from("achievements").insert({
+    ...(imagePath ? { image_path: imagePath } : {}),
     title,
     result: str(formData, "result"),
     context: str(formData, "context"),
@@ -79,11 +103,31 @@ export async function updateAchievement(_prevState: FormState, formData: FormDat
   const title = str(formData, "title");
   if (!title) return { error: "Title is required." };
 
+  const existingImagePath = str(formData, "existing_image_path");
+  let imagePath = existingImagePath;
+  let imageChanged = false;
+
+  const imageFile = formData.get("image");
+  if (imageFile instanceof File && imageFile.size > 0) {
+    try {
+      imagePath = await uploadAchievementImage(supabase, imageFile);
+    } catch (err) {
+      return { error: (err as Error).message };
+    }
+    imageChanged = true;
+    if (existingImagePath) await supabase.storage.from("media").remove([existingImagePath]);
+  } else if (formData.get("remove_image") === "on" && existingImagePath) {
+    await supabase.storage.from("media").remove([existingImagePath]);
+    imagePath = null;
+    imageChanged = true;
+  }
+
   const fieldDefinitions = await getFieldDefinitions(supabase);
 
   const { error } = await supabase
     .from("achievements")
     .update({
+      ...(imageChanged ? { image_path: imagePath } : {}),
       title,
       result: str(formData, "result"),
       context: str(formData, "context"),
@@ -104,8 +148,10 @@ export async function deleteAchievement(formData: FormData) {
   const id = formData.get("id");
   if (typeof id !== "string") return;
 
+  const { data: row } = await supabase.from("achievements").select("image_path").eq("id", id).maybeSingle();
   const { error } = await supabase.from("achievements").delete().eq("id", id);
   if (error) throw new Error(error.message);
+  if (row?.image_path) await supabase.storage.from("media").remove([row.image_path]);
 
   revalidatePath("/admin/achievements");
   revalidatePath("/");

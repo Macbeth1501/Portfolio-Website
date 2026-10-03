@@ -44,8 +44,13 @@ body {
   line-height: 1.6;
 }
 
+/* The table the sheet lies on: a faint survey grid fills the side margins. */
 body:has(.sheet) {
-  background: var(--paper-deep);
+  background-color: var(--paper-deep);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px);
+  background-size: 4rem 4rem;
 }
 
 ::selection {

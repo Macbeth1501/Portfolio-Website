@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
-import { ReorderButtons } from "@/components/admin/ReorderButtons";
+import { ReorderList } from "@/components/admin/ReorderList";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import { deleteExperience, moveExperience } from "./actions";
 
@@ -21,7 +21,31 @@ export default async function AdminExperiencePage() {
     return <p className="mt-8 text-sm text-amber-deep">{error.message}</p>;
   }
 
-  const experiences = rows ?? [];
+  const items = (rows ?? []).map((entry) => ({
+    id: entry.id,
+    content: (
+      <>
+        <div className="min-w-0 flex-1">
+          <p className="text-ink">
+            {entry.role_title} <span className="text-ink-muted">— {entry.organization}</span>
+          </p>
+          {entry.date_range ? <p className="mt-1 font-mono text-xs text-ink-muted">{entry.date_range}</p> : null}
+        </div>
+
+        <Link
+          href={`/admin/experience/${entry.id}/edit`}
+          className="font-mono text-xs text-blue underline underline-offset-2 hover:text-blue-deep"
+        >
+          Edit
+        </Link>
+
+        <form action={deleteExperience}>
+          <input type="hidden" name="id" value={entry.id} />
+          <DeleteButton confirmLabel={entry.role_title} />
+        </form>
+      </>
+    ),
+  }));
 
   return (
     <div>
@@ -35,41 +59,7 @@ export default async function AdminExperiencePage() {
         </Link>
       </div>
 
-      <ul className="mt-8 divide-y divide-line border-t border-line">
-        {experiences.map((entry, index) => (
-          <li key={entry.id} className="flex items-center gap-4 py-4">
-            <ReorderButtons
-              upAction={moveExperience.bind(null, entry.id, "up")}
-              downAction={moveExperience.bind(null, entry.id, "down")}
-              isFirst={index === 0}
-              isLast={index === experiences.length - 1}
-            />
-
-            <div className="min-w-0 flex-1">
-              <p className="text-ink">
-                {entry.role_title} <span className="text-ink-muted">— {entry.organization}</span>
-              </p>
-              {entry.date_range ? (
-                <p className="mt-1 font-mono text-xs text-ink-muted">{entry.date_range}</p>
-              ) : null}
-            </div>
-
-            <Link
-              href={`/admin/experience/${entry.id}/edit`}
-              className="font-mono text-xs text-blue underline underline-offset-2 hover:text-blue-deep"
-            >
-              Edit
-            </Link>
-
-            <form action={deleteExperience}>
-              <input type="hidden" name="id" value={entry.id} />
-              <DeleteButton confirmLabel={entry.role_title} />
-            </form>
-          </li>
-        ))}
-
-        {experiences.length === 0 ? <li className="py-4 text-sm text-ink-muted">No experience entries yet.</li> : null}
-      </ul>
+      <ReorderList items={items} moveAction={moveExperience} emptyMessage="No experience entries yet." />
     </div>
   );
 }

@@ -27,6 +27,10 @@ export default async function EditAchievementPage({ params }: { params: Promise<
           result: row.result ?? "",
           context: row.context ?? "",
           date: row.date ?? "",
+          imagePath: row.image_path ?? null,
+          imageUrl: row.image_path
+            ? supabase.storage.from("media").getPublicUrl(row.image_path).data.publicUrl
+            : undefined,
           customFields: row.custom_fields ?? [],
         }}
       />

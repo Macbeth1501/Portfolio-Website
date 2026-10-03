@@ -1,6 +1,7 @@
 import type { Achievement } from "@/lib/types";
 import { isMeasured } from "@/lib/measured";
 import { BenchmarkMark } from "./BenchmarkMark";
+import { FitImage } from "./FitImage";
 import { CustomFieldsList } from "./CustomFieldsList";
 import { SectionHeading } from "./SectionHeading";
 
@@ -33,6 +34,11 @@ export function AchievementsSection({ achievements }: { achievements: Achievemen
               <p className="mt-1 text-ink">{achievement.title}</p>
               {achievement.context ? (
                 <p className="mt-1 max-w-[68ch] text-sm text-ink-muted">{achievement.context}</p>
+              ) : null}
+              {achievement.imageUrl ? (
+                <div className="mt-4">
+                  <FitImage src={achievement.imageUrl} alt={achievement.title} />
+                </div>
               ) : null}
               <CustomFieldsList fields={achievement.customFields} />
             </div>

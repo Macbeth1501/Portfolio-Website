@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAuthServerClient } from "@/lib/supabase/serverAuth";
+import { normalizeUrl } from "@/lib/url";
 import type { ProjectStatus } from "@/lib/types";
 import { buildCustomFieldsPayload } from "@/lib/customFields";
 
@@ -36,6 +37,11 @@ function str(formData: FormData, key: string): string | null {
   if (typeof value !== "string") return null;
   const trimmed = value.trim();
   return trimmed.length > 0 ? trimmed : null;
+}
+
+function url(formData: FormData, key: string): string | null {
+  const value = str(formData, key);
+  return value ? normalizeUrl(value) : null;
 }
 
 async function uploadProjectImage(
@@ -98,8 +104,8 @@ export async function createProject(_prevState: FormState, formData: FormData): 
     result: str(formData, "result"),
     tech_stack: parseTechStack(formData.get("tech_stack")),
     image_path: imagePath,
-    live_url: str(formData, "live_url"),
-    repo_url: str(formData, "repo_url"),
+    live_url: url(formData, "live_url"),
+    repo_url: url(formData, "repo_url"),
     team_note: str(formData, "team_note"),
     custom_fields: buildCustomFieldsPayload(fieldDefinitions, formData),
   });
@@ -159,8 +165,8 @@ export async function updateProject(_prevState: FormState, formData: FormData): 
       result: str(formData, "result"),
       tech_stack: parseTechStack(formData.get("tech_stack")),
       image_path: imagePath,
-      live_url: str(formData, "live_url"),
-      repo_url: str(formData, "repo_url"),
+      live_url: url(formData, "live_url"),
+      repo_url: url(formData, "repo_url"),
       team_note: str(formData, "team_note"),
       custom_fields: buildCustomFieldsPayload(fieldDefinitions, formData),
     })

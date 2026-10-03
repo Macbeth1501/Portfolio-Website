@@ -101,6 +101,7 @@ create table if not exists achievements (
   result text,
   context text,
   date text,
+  image_path text,
   custom_fields jsonb not null default '[]',
   sort_order int not null default 0,
   created_at timestamptz not null default now(),
