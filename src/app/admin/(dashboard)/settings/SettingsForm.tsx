@@ -24,12 +24,23 @@ export function SettingsForm({
 }) {
   const [state, formAction] = useActionState<FormState, FormData>(updateSiteSettings, null);
   const [removePhoto, setRemovePhoto] = useState(false);
+  const [fullName, setFullName] = useState(settings.fullName);
+  const [roleLine, setRoleLine] = useState(settings.roleLine);
+  const [bio, setBio] = useState(settings.bio);
   const [stats, setStats] = useState<Pair[]>(settings.snapshotStats.length > 0 ? settings.snapshotStats : [{ label: "", value: "" }]);
   const [links, setLinks] = useState<Pair[]>(
     settings.contactLinks.length > 0
       ? settings.contactLinks.map((link) => ({ label: link.label, value: link.url }))
       : [{ label: "", value: "" }],
   );
+
+  function updateStat(index: number, field: keyof Pair, value: string) {
+    setStats((current) => current.map((item, i) => (i === index ? { ...item, [field]: value } : item)));
+  }
+
+  function updateLink(index: number, field: keyof Pair, value: string) {
+    setLinks((current) => current.map((item, i) => (i === index ? { ...item, [field]: value } : item)));
+  }
 
   return (
     <form action={formAction} className="mt-8 flex max-w-xl flex-col gap-8">
@@ -42,21 +53,41 @@ export function SettingsForm({
           <label htmlFor="full_name" className={labelClass}>
             Full name
           </label>
-          <input id="full_name" name="full_name" required defaultValue={settings.fullName} className={inputClass} />
+          <input
+            id="full_name"
+            name="full_name"
+            required
+            value={fullName}
+            onChange={(event) => setFullName(event.target.value)}
+            className={inputClass}
+          />
         </div>
 
         <div className="flex flex-col gap-1">
           <label htmlFor="role_line" className={labelClass}>
             Role line
           </label>
-          <input id="role_line" name="role_line" defaultValue={settings.roleLine} className={inputClass} />
+          <input
+            id="role_line"
+            name="role_line"
+            value={roleLine}
+            onChange={(event) => setRoleLine(event.target.value)}
+            className={inputClass}
+          />
         </div>
 
         <div className="flex flex-col gap-1">
           <label htmlFor="bio" className={labelClass}>
             Bio
           </label>
-          <textarea id="bio" name="bio" rows={4} defaultValue={settings.bio} className={inputClass} />
+          <textarea
+            id="bio"
+            name="bio"
+            rows={4}
+            value={bio}
+            onChange={(event) => setBio(event.target.value)}
+            className={inputClass}
+          />
         </div>
 
         <div className="flex flex-col gap-1">
@@ -90,7 +121,8 @@ export function SettingsForm({
               <label className={labelClass}>Label</label>
               <input
                 name="stat_label"
-                defaultValue={stat.label}
+                value={stat.label}
+                onChange={(event) => updateStat(index, "label", event.target.value)}
                 className={inputClass}
                 placeholder="e.g. CGPA"
               />
@@ -99,7 +131,8 @@ export function SettingsForm({
               <label className={labelClass}>Value</label>
               <input
                 name="stat_value"
-                defaultValue={stat.value}
+                value={stat.value}
+                onChange={(event) => updateStat(index, "value", event.target.value)}
                 className={inputClass}
                 placeholder="e.g. 9.01 / 10"
               />
@@ -130,7 +163,8 @@ export function SettingsForm({
               <label className={labelClass}>Label</label>
               <input
                 name="link_label"
-                defaultValue={link.label}
+                value={link.label}
+                onChange={(event) => updateLink(index, "label", event.target.value)}
                 className={inputClass}
                 placeholder="e.g. GitHub"
               />
@@ -139,7 +173,8 @@ export function SettingsForm({
               <label className={labelClass}>URL</label>
               <input
                 name="link_url"
-                defaultValue={link.value}
+                value={link.value}
+                onChange={(event) => updateLink(index, "value", event.target.value)}
                 className={inputClass}
                 placeholder="https://…"
               />
