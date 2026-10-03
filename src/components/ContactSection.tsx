@@ -12,18 +12,15 @@ export function ContactSection({ links }: { links: FooterLink[] }) {
   return (
     <section id="contact" aria-labelledby="contact-heading" className="mt-16 scroll-mt-8 sm:mt-24">
       <SectionHeading id="contact-heading">Contact</SectionHeading>
-      <div className="mt-6 md:grid md:grid-cols-[9rem_1fr] md:gap-x-8">
-        <div />
-        <div>
-          <p className="max-w-[56ch] text-lg text-ink">
-            Have a role, a project or a research idea in mind? Send me a note and I will reply.
-          </p>
-          <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <ButtonLink href={email.url} variant="primary">
-              Email me
-            </ButtonLink>
-            <span className="font-mono text-sm text-ink-muted">{address}</span>
-          </div>
+      <div className="mt-8 flex flex-col items-center text-center">
+        <p className="max-w-[48ch] text-lg text-ink">
+          Have a role, a project or a research idea in mind? Send me a note and I will reply.
+        </p>
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <ButtonLink href={email.url} variant="primary">
+            Email me
+          </ButtonLink>
+          <span className="font-mono text-sm text-ink-muted">{address}</span>
         </div>
       </div>
     </section>

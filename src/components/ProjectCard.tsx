@@ -4,7 +4,6 @@ import { isMeasured } from "@/lib/measured";
 import { StatusBadge } from "./StatusBadge";
 import { CustomFieldsList } from "./CustomFieldsList";
 import { linkClass } from "./linkClass";
-import { ContourPlate } from "./ContourPlate";
 import { BenchmarkMark } from "./BenchmarkMark";
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -18,13 +17,11 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
 
       <div className="mt-3 md:mt-0">
-        <div className="mb-4">
-          {project.imageUrl ? (
+        {project.imageUrl ? (
+          <div className="mb-4">
             <FitImage src={project.imageUrl} alt={`Screenshot of ${project.title}`} />
-          ) : (
-            <ContourPlate seed={project.slug} />
-          )}
-        </div>
+          </div>
+        ) : null}
 
         <h3 className="max-w-[52ch] text-lg font-medium text-ink">{project.title}</h3>
 

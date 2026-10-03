@@ -20,7 +20,7 @@ export function Legend({ stats, links }: { stats: SnapshotStat[]; links: FooterL
       {links.length > 0 ? (
         <nav
           aria-label="Contact"
-          className={`flex flex-wrap gap-3 p-4 ${stats.length > 0 ? "border-t border-ink/40" : ""}`}
+          className={`grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] gap-3 p-4 ${stats.length > 0 ? "border-t border-ink/40" : ""}`}
         >
           {links.map((link) => (
             <ButtonLink key={link.label} href={link.url}>

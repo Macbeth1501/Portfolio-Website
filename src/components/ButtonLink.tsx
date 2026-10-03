@@ -1,7 +1,7 @@
 import { isExternal } from "@/lib/url";
 
 const base =
-  "inline-flex min-h-11 items-center border px-4 text-sm font-medium transition-colors duration-150 ease-out motion-reduce:transition-none";
+  "inline-flex min-h-11 items-center justify-center border px-4 text-sm font-medium transition-colors duration-150 ease-out motion-reduce:transition-none";
 
 const variants = {
   quiet: "border-ink/40 text-ink hover:bg-ink hover:text-paper",
