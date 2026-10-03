@@ -1,5 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { SnapshotStrip } from "@/components/SnapshotStrip";
+import { SectionNav, type SectionLink } from "@/components/SectionNav";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { SkillsSection } from "@/components/SkillsSection";
@@ -11,24 +12,33 @@ export const revalidate = 60;
 
 export default async function Home() {
   const { content, error } = await getSiteContent();
+  if (error) console.error(error);
+
+  const sections: (SectionLink & { present: boolean })[] = [
+    { id: "experience", label: "Experience", present: content.experience.length > 0 },
+    { id: "achievements", label: "Achievements", present: content.achievements.length > 0 },
+    { id: "projects", label: "Projects", present: content.projects.length > 0 },
+    { id: "skills", label: "Skills", present: content.skillGroups.length > 0 },
+  ];
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 pb-24 sm:px-8">
+    <main id="main" className="mx-auto w-full max-w-4xl px-6 pb-24 sm:px-8">
       {error ? (
         <p className="mt-8 max-w-xl text-ink-muted">
           <span className="text-amber-deep" aria-hidden="true">
             ⚠
           </span>{" "}
-          Supabase is not connected yet: {error}
+          Some content could not be loaded right now. Please try again shortly.
         </p>
       ) : null}
 
-      <Hero hero={content.hero} />
+      <Hero hero={content.hero} links={content.footerLinks} />
       <SnapshotStrip stats={content.snapshotStats} />
+      <SectionNav sections={sections.filter((section) => section.present)} />
       <ExperienceSection experience={content.experience} />
+      <AchievementsSection achievements={content.achievements} />
       <ProjectsSection projects={content.projects} />
       <SkillsSection skillGroups={content.skillGroups} />
-      <AchievementsSection achievements={content.achievements} />
       <SiteFooter links={content.footerLinks} />
     </main>
   );

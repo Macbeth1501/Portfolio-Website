@@ -105,11 +105,11 @@ Warm, restrained, paper-and-ink palette with two earned accent colors reserved f
 - **Label** (400, 12–14px, Inter or JetBrains Mono depending on context): meta text — dates, tech-stack tags, snapshot stat labels.
 
 ### Named Rules
-**The Mono-Means-Measured Rule.** JetBrains Mono appears only on dates, tech-stack tags, and measured metrics. It never sets body prose or headings, and it is never reached for as a generic "technical" signal.
+**The Mono-Means-Measured Rule.** JetBrains Mono appears only on dates, tech-stack tags, and measured metrics. A result counts as measured only if it states a number; prose outcomes render in ink, not green mono. It never sets body prose or headings, and it is never reached for as a generic "technical" signal.
 
 ## Layout
 
-Single-column, left-aligned reading flow, capped at a ~768px (`max-w-3xl`) column centered in the viewport on wide screens — the column itself stays left-aligned internally; centering the column is a readability choice, not a return to a marketing-page composition. Vertical rhythm is generous and consistent: sections are separated by `mt-16` (mobile) / `mt-24` (desktop, ≥640px), entries within a section are separated by `border-line` hairline dividers rather than cards or shadows. The hero breaks to a `flex-row` (text + photo side by side) only at ≥640px; below that it stacks. Skills groups move from one column to a two-column grid at ≥640px.
+Left-aligned reading flow, capped at a ~896px (`max-w-4xl`) column centered in the viewport on wide screens. From 768px (`md`), Experience, Projects and Achievements entries use a **ledger rail**: a fixed 9rem left column carries each entry's date, status or location in small type (the lab-notebook margin), and the body sits in the right column; below 768px the same meta stacks above the entry. The hero, snapshot strip, Skills and footer stay full-width single-column. Body text keeps its ~68ch measure regardless. The column itself stays left-aligned internally — the column itself stays left-aligned internally; centering the column is a readability choice, not a return to a marketing-page composition. Vertical rhythm is generous and consistent: sections are separated by `mt-16` (mobile) / `mt-24` (desktop, ≥640px), entries within a section are separated by `border-line` hairline dividers rather than cards or shadows. The hero breaks to a `flex-row` (text + photo side by side) only at ≥640px; below that it stacks. Skills groups move from one column to a two-column grid at ≥640px.
 
 ## Elevation & Depth
 

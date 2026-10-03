@@ -5,7 +5,7 @@ export function SkillsSection({ skillGroups }: { skillGroups: SkillGroup[] }) {
   if (skillGroups.length === 0) return null;
 
   return (
-    <section aria-labelledby="skills-heading" className="mt-16 sm:mt-24">
+    <section id="skills" aria-labelledby="skills-heading" className="mt-16 scroll-mt-8 sm:mt-24">
       <h2
         id="skills-heading"
         className="font-[family-name:var(--font-display)] text-2xl font-medium text-ink sm:text-3xl"
@@ -27,7 +27,7 @@ export function SkillsSection({ skillGroups }: { skillGroups: SkillGroup[] }) {
                   >
                     {skill.name}
                     {extras.map((field) => (
-                      <span key={field.key} className="block text-[11px] text-ink-muted/80">
+                      <span key={field.key} className="block text-xs text-ink-muted">
                         {field.label}: {formatCustomFieldValue(field)}
                       </span>
                     ))}

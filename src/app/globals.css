@@ -1,10 +1,6 @@
 @import "tailwindcss";
 
-/*
- * "The Working Profile" design tokens — see SPEC.md Section 3.2.
- * This is only the token foundation for Phase 1's pipeline check.
- * The real visual design pass happens in Phase 2 with Impeccable.
- */
+/* "The Working Profile" design tokens — see DESIGN.md. */
 :root {
   --ink: #152a43; /* primary text, headings */
   --paper: #fbf9f4; /* page background — warm off-white */
